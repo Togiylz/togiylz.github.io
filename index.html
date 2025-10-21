@@ -1,36 +1,563 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tolga Yıldız | Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #0d1117; color: #c9d1d9;
-    }
-    header { text-align: center; padding: 50px 0; }
-    h1 { font-size: 2.5rem; margin: 0; }
-    section { max-width: 800px; margin: auto; padding: 20px; }
-    a { color: #58a6ff; text-decoration: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tolga Yıldız | Oyun Geliştirici</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            color: #d1c7b8; /* Eskitilmiş kağıt rengi */
+            background-color: #1a1611; /* Koyu ahşap/deri rengi */
+            background-image: url('https://www.transparenttextures.com/patterns/crissxcross.png');
+            overflow-x: hidden;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            z-index: -2;
+            background: radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1), transparent 40%),
+                        radial-gradient(circle at 75% 75%, rgba(185, 28, 28, 0.1), transparent 40%);
+            animation: move-glow 20s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes move-glow {
+            from { transform: translate(-25%, -25%); }
+            to { transform: translate(25%, 25%); }
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .section-title {
+            @apply text-4xl font-bold text-amber-300 mb-12 text-center font-cinzel tracking-widest;
+        }
+        
+        .card {
+            @apply bg-black/30 backdrop-blur-sm border border-amber-800/50 rounded-lg shadow-lg p-6 transition-all duration-300 ease-out;
+        }
+        .card:hover {
+            @apply transform -translate-y-2 border-amber-400 shadow-[0_0_25px_rgba(212,175,55,0.4)];
+        }
+
+        .lang-btn.active { @apply text-amber-300 font-semibold; }
+        .lang-btn { @apply text-slate-400 hover:text-amber-300 transition-colors; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #hero {
+             background-image: none;
+        }
+
+        /* Projeler Bölümü Stilleri */
+        .projects-container {
+            display: flex;
+            gap: 2.5rem;
+            overflow-x: auto;
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 100%;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: #a37a3c #3d2b1f;
+        }
+        .projects-container::-webkit-scrollbar { height: 12px; }
+        .projects-container::-webkit-scrollbar-track { background: #3d2b1f; border-radius: 5px;}
+        .projects-container::-webkit-scrollbar-thumb { background-color: #a37a3c; border-radius: 5px; border: 2px solid #3d2b1f; }
+        
+        .project-card {
+            flex: 0 0 360px;
+            scroll-snap-align: center;
+            position: relative;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'), linear-gradient(to bottom, #f0e6d2, #d8c8b4);
+            background-blend-mode: multiply;
+            background-color: #fdf5e6;
+            color: #3d2b1f;
+            border: 1px solid #c9b79c;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.1); /* İç gölge eklendi */
+            padding: 4.5rem 1.5rem 1.5rem 1.5rem; 
+            border-radius: 4px;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card.reveal {
+            opacity: 0;
+            transform: translateX(-100px) rotateZ(-20deg) rotateY(45deg) scale(0.8);
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition-delay: calc(var(--reveal-delay) * 100ms);
+        }
+        
+        .project-card.reveal.visible {
+            opacity: 1;
+            transform: translateX(0) rotateZ(0) rotateY(0) scale(1);
+        }
+
+        .dagger-svg {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            width: 130px;
+            filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.7));
+            pointer-events: none;
+            transform-origin: center;
+            transform: translateX(-50%) rotate(120deg); /* Bıçak eğimi ayarlandı */
+        }
+
+        /* Daha gerçekçi hançer SVG için stil */
+        .dagger-svg .blade {
+            fill: #a7a7a7;
+            stroke: #666;
+            stroke-width: 1px;
+            filter: url(#bevel);
+        }
+        .dagger-svg .guard {
+            fill: #6b5c4b;
+            stroke: #5a4a40;
+            stroke-width: 1px;
+        }
+        .dagger-svg .handle {
+            fill: #4a3e31;
+            stroke: #3d2b1f;
+            stroke-width: 1px;
+        }
+        .dagger-svg .pommel {
+            fill: #a7a7a7;
+            stroke: #666;
+            stroke-width: 1px;
+        }
+        .dagger-svg .rivet {
+            fill: #d4af37;
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Tolga Yıldız</h1>
-    <p>Game Developer | Unity | VR | AI Tools</p>
-  </header>
-  <section>
-    <h2>About Me</h2>
-    <p>I’m a Unity developer passionate about VR, game design, and procedural generation.</p>
-  </section>
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="#">UDO Mobile Game Prototype</a></li>
-      <li><a href="#">VR Therapy Project</a></li>
-    </ul>
-  </section>
+<body class="bg-slate-900 text-slate-300">
+    
+    <canvas id="particle-canvas"></canvas>
+
+    <header class="bg-black/50 backdrop-blur-sm sticky top-0 z-50 border-b border-amber-800/50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-wider font-cinzel">TOLGA YILDIZ</a>
+            <div class="hidden md:flex items-center">
+                <div class="flex space-x-6 text-lg"><a href="#about" class="hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a><a href="#skills" class="hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a><a href="#experience" class="hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a><a href="#projects" class="hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a><a href="#contact" class="hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a></div>
+                <div class="ml-8 flex items-center space-x-2 border-l border-amber-800/50 pl-6 text-sm"><button id="lang-tr" class="lang-btn active">TR</button><span class="text-slate-500">/</span><button id="lang-en" class="lang-btn">EN</button></div>
+            </div>
+             <div class="flex items-center md:hidden">
+                <div class="flex items-center space-x-2 mr-4"><button id="lang-tr-mobile" class="lang-btn active text-sm">TR</button><span class="text-slate-500">/</span><button id="lang-en-mobile" class="lang-btn text-sm">EN</button></div>
+                <button id="mobile-menu-button" class="text-white"><i data-lucide="menu"></i></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2"><a href="#about" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a><a href="#skills" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a><a href="#experience" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a><a href="#projects" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a><a href="#contact" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a></div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="hero" class="text-center py-24 md:py-32">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-500 font-cinzel">Tolga Yıldız</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-amber-300 mb-8 font-cinzel" data-lang-key="hero_subtitle"></h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-300 mb-10" data-lang-key="hero_description"></p>
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.linkedin.com/in/tolgayilddiz" target="_blank" class="text-slate-400 hover:text-amber-300 transition-transform hover:scale-110"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                <a href="https://github.com/Togiylz" target="_blank" class="text-slate-400 hover:text-amber-300 transition-transform hover:scale-110"><i data-lucide="github" class="w-8 h-8"></i></a>
+                <a href="mailto:tolgayilddiz@gmail.com" class="text-slate-400 hover:text-amber-300 transition-transform hover:scale-110"><i data-lucide="mail" class="w-8 h-8"></i></a>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 reveal">
+            <h2 class="section-title" data-lang-key="about_title"></h2>
+            <div class="max-w-4xl mx-auto text-center text-lg leading-relaxed"><p data-lang-key="about_text"></p></div>
+        </section>
+
+        <section id="skills" class="py-20 reveal">
+            <h2 class="section-title" data-lang-key="skills_title"></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="card"><h3 class="text-xl font-bold text-amber-300 mb-4 font-cinzel" data-lang-key="skills_cat1_title"></h3><ul class="space-y-2"><li data-lang-key="skills_cat1_list"></li></ul></div>
+                <div class="card"><h3 class="text-xl font-bold text-amber-300 mb-4 font-cinzel" data-lang-key="skills_cat2_title"></h3><ul class="space-y-2"><li data-lang-key="skills_cat2_list1"></li><li data-lang-key="skills_cat2_list2"></li><li data-lang-key="skills_cat2_list3"></li></ul></div>
+                <div class="card"><h3 class="text-xl font-bold text-amber-300 mb-4 font-cinzel" data-lang-key="skills_cat3_title"></h3><ul class="space-y-2"><li data-lang-key="skills_cat3_list1"></li><li data-lang-key="skills_cat3_list2"></li><li data-lang-key="skills_cat3_list3"></li></ul></div>
+                <div class="card"><h3 class="text-xl font-bold text-amber-300 mb-4 font-cinzel" data-lang-key="skills_cat4_title"></h3><ul class="space-y-2"><li data-lang-key="skills_cat4_list1"></li><li data-lang-key="skills_cat4_list2"></li></ul></div>
+                <div class="card"><h3 class="text-xl font-bold text-amber-300 mb-4 font-cinzel" data-lang-key="skills_cat5_title"></h3><ul class="space-y-2"><li data-lang-key="skills_cat5_list1"></li><li data-lang-key="skills_cat5_list2"></li><li data-lang-key="skills_cat5_list3"></li><li data-lang-key="skills_cat5_list4"></li></ul></div>
+                <div class="card"><h3 class="text-xl font-bold text-amber-300 mb-4 font-cinzel" data-lang-key="skills_cat6_title"></h3><ul class="space-y-2"><li data-lang-key="skills_cat6_list1"></li><li data-lang-key="skills_cat6_list2"></li></ul></div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 reveal">
+            <h2 class="section-title" data-lang-key="experience_title"></h2>
+            <div class="max-w-4xl mx-auto relative border-l-2 border-amber-800/30 pl-10">
+                <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/70" data-lang-key="exp1_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp1_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp1_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp1_desc1"></li><li data-lang-key="exp1_desc2"></li></ul></div>
+                <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/70" data-lang-key="exp2_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp2_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp2_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp2_desc1"></li><li data-lang-key="exp2_desc2"></li><li data-lang-key="exp2_desc3"></li></ul></div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 w-full overflow-hidden">
+            <h2 class="section-title" data-lang-key="projects_title"></h2>
+            <div class="projects-container">
+                <!-- Proje 1 --><div class="project-card reveal">
+                    <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                <feMerge>
+                                    <feMergeNode in="shadow"/>
+                                    <feMergeNode in="light"/>
+                                    <feMergeNode in="dark"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                        <circle class="pommel" cx="50" cy="180" r="7"/>
+                        <circle class="rivet" cx="50" cy="130" r="2"/>
+                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj1_title"></h3>
+                    <p class="mb-4 text-sm" data-lang-key="proj1_desc"></p>
+                    <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj1_feat1"></li><li data-lang-key="proj1_feat2"></li></ul>
+                    <a href="https://play.google.com/store/apps/details?id=togi.games" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold"><span data-lang-key="proj1_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
+                </div>
+                <!-- Proje 2 --><div class="project-card reveal">
+                     <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                <feMerge>
+                                    <feMergeNode in="shadow"/>
+                                    <feMergeNode in="light"/>
+                                    <feMergeNode in="dark"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                        <circle class="pommel" cx="50" cy="180" r="7"/>
+                        <circle class="rivet" cx="50" cy="130" r="2"/>
+                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj2_title"></h3>
+                    <p class="mb-4 text-sm" data-lang-key="proj2_desc"></p>
+                    <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj2_feat1"></li></ul>
+                    <a href="https://togiss.itch.io/casegame" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold"><span data-lang-key="proj2_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
+                </div>
+                <!-- Proje 3 --><div class="project-card reveal">
+                    <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                <feMerge>
+                                    <feMergeNode in="shadow"/>
+                                    <feMergeNode in="light"/>
+                                    <feMergeNode in="dark"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                        <circle class="pommel" cx="50" cy="180" r="7"/>
+                        <circle class="rivet" cx="50" cy="130" r="2"/>
+                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj3_title"></h3>
+                    <p class="mb-4 text-sm" data-lang-key="proj3_desc"></p>
+                    <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj3_feat1"></li><li data-lang-key="proj3_feat2"></li></ul>
+                    <a href="https://www.meta.com/experiences/24337675112595406/" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold"><span data-lang-key="proj3_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
+                </div>
+                <!-- Proje 4 --><div class="project-card reveal">
+                    <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                <feMerge>
+                                    <feMergeNode in="shadow"/>
+                                    <feMergeNode in="light"/>
+                                    <feMergeNode in="dark"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                        <circle class="pommel" cx="50" cy="180" r="7"/>
+                        <circle class="rivet" cx="50" cy="130" r="2"/>
+                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj4_title"></h3>
+                    <p class="mb-4 text-sm" data-lang-key="proj4_desc"></p>
+                    <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj4_feat1"></li><li data-lang-key="proj4_feat2"></li></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 reveal">
+            <h2 class="section-title" data-lang-key="education_title"></h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="card text-center reveal"><h3 class="text-xl font-bold text-white font-cinzel" data-lang-key="edu1_uni"></h3><p class="text-amber-300 font-medium" data-lang-key="edu1_degree"></p><p class="text-slate-400" data-lang-key="edu1_loc"></p></div>
+                <div class="card text-center reveal"><h3 class="text-xl font-bold text-white font-cinzel" data-lang-key="edu2_school"></h3><p class="text-amber-300 font-medium" data-lang-key="edu2_field"></p><p class="text-slate-400" data-lang-key="edu2_loc"></p></div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 text-center reveal">
+            <h2 class="section-title" data-lang-key="contact_title"></h2>
+            <p class="max-w-2xl mx-auto text-lg mb-8" data-lang-key="contact_desc"></p>
+            <a href="mailto:tolgayilddiz@gmail.com" class="inline-block bg-amber-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors shadow-[0_0_20px_theme(colors.amber.600/50%)] hover:shadow-[0_0_30px_theme(colors.amber.600/70%)] font-cinzel" data-lang-key="contact_button"></a>
+        </section>
+
+    </main>
+
+    <footer class="bg-black/50 border-t border-amber-800/50">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                 <a href="https://www.linkedin.com/in/tolgayilddiz" target="_blank" class="text-slate-400 hover:text-amber-300 transition-transform hover:scale-110"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                 <a href="https://github.com/Togiylz" target="_blank" class="text-slate-400 hover:text-amber-300 transition-transform hover:scale-110"><i data-lucide="github" class="w-6 h-6"></i></a>
+                 <a href="mailto:tolgayilddiz@gmail.com" class="text-slate-400 hover:text-amber-300 transition-transform hover:scale-110"><i data-lucide="mail" class="w-6 h-6"></i></a>
+            </div>
+            <p data-lang-key="footer_text"></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Geliştirilmiş Alev Efekti ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+            // Mouse hareketinde daha fazla parçacık
+            if (particles.length < 200) { 
+                 for (let i = 0; i < 7; i++) {
+                    particles.push(new Particle(mouse.x, mouse.y));
+                }
+            }
+        });
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 6 + 2; 
+                this.baseSize = this.size;
+                this.speedX = Math.random() * 4 - 2; 
+                this.speedY = Math.random() * -2 - 1; 
+                this.colorValue = Math.random() * 40 + 10;
+                this.color = 'hsl(' + this.colorValue + ', 100%, 50%)';
+                this.life = 1;
+                this.lifeReduction = Math.random() * 0.025 + 0.015;
+                this.sway = Math.random() * 2 * Math.PI;
+                this.swaySpeed = Math.random() * 0.05 + 0.02;
+            }
+            update() {
+                this.sway += this.swaySpeed;
+                this.x += Math.sin(this.sway) + this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.04; 
+                
+                if (this.size > 0.2) {
+                    this.size -= (this.baseSize / 50); 
+                }
+
+                this.life -= this.lifeReduction;
+
+                if(this.life < 0.5) {
+                    this.colorValue -= 1.5;
+                    this.color = 'hsl(' + Math.max(0, this.colorValue) + ', 100%, 50%)';
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function handleParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].life <= 0 || particles[i].size <= 0.2) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = 'rgba(26, 22, 17, 0.3)'; // Solma hızı daha da artırıldı
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.globalCompositeOperation = 'lighter';
+
+            if (particles.length < 200 && Math.random() > 0.85) { 
+                const x = Math.random() * canvas.width;
+                particles.push(new Particle(x, canvas.height + 20)); 
+            }
+
+            handleParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+
+        // --- Diğer Scriptler ---
+        lucide.createIcons();
+        const translations = {
+            en: {
+                nav_about: "About", nav_skills: "Skills", nav_experience: "Experience", nav_projects: "Projects", nav_contact: "Contact",
+                hero_subtitle: "Game Developer (Unity / C#)",
+                hero_description: "I am a Game Developer focused on Unity (C#) with a passion for creating innovative and engaging interactive experiences.",
+                about_title: "About Me",
+                about_text: "I am a Software Engineering student and a Game Developer focused on Unity (C#). Experienced in publishing games on Google Play with integrated Firebase Leaderboards and AdMob monetization. Skilled in optimization, problem-solving, and agile teamwork. Passionate about creating innovative and engaging interactive experiences.",
+                skills_title: "Technical Skills",
+                skills_cat1_title: "Programming Languages", skills_cat1_list: "C#, C++, C, Java, Python, SQL (basic)",
+                skills_cat2_title: "Game Engines & Frameworks", skills_cat2_list1: "Unity (C#)", skills_cat2_list2: "Unreal Engine 4/5 (Blueprints & C++)", skills_cat2_list3: "Godot (optional)",
+                skills_cat3_title: "Development Tools", skills_cat3_list1: "Firebase (Leaderboards, Analytics, Auth)", skills_cat3_list2: "AdMob, PlayFab, Cinemachine, DOTween", skills_cat3_list3: "Plastic SCM, Git",
+                skills_cat4_title: "Graphics & UI/UX Tools", skills_cat4_list1: "Figma, Adobe Photoshop (basic)", skills_cat4_list2: "Blender (basic), Spine (2D animation)",
+                skills_cat5_title: "Core Knowledge & Techniques", skills_cat5_list1: "Object-Oriented Programming (OOP)", skills_cat5_list2: "Data Structures & Mobile Game Optimization", skills_cat5_list3: "Real-time Multiplayer Logic", skills_cat5_list4: "VR/AR Development, Level Design",
+                skills_cat6_title: "Languages", skills_cat6_list1: "Turkish (Native)", skills_cat6_list2: "English (Fluent, C1)",
+                experience_title: "Experience",
+                exp1_date: "Summer 2025", exp1_title: "Game Developer Intern", exp1_company: "UDO, Ankara, Turkey", exp1_desc1: "Developed and optimized core gameplay mechanics in Unity (C#) for a showcase-selected project.", exp1_desc2: "Collaborated in an agile team environment, applying Scrum practices.",
+                exp2_date: "Jul 2025 - Sep 2025", exp2_title: "Game Developer Intern", exp2_company: "Craftian Makes, Istanbul, Turkey", exp2_desc1: "Developed 'Throw Master (Demo)', a VR action game for Meta Quest.", exp2_desc2: "Focused on precise controller tracking and immersive environments.", exp2_desc3: "Enhanced user immersion through refined haptic feedback and realistic physics-based object responses.",
+                projects_title: "Projects",
+                proj1_title: "Sand Blast - Mobile Game", proj1_desc: "A Unity game with a real-time global leaderboard (Firebase) and AdMob monetization.", proj1_feat1: "Realistic sand physics and optimized particle effects.", proj1_feat2: "Object pooling technique implemented for smooth mobile performance.", proj1_link: "View on Google Play",
+                proj2_title: "Block Collapse - Puzzle Game", proj2_desc: "A puzzle game with dynamic grid management, intelligent deadlock resolution, and optimized performance.", proj2_feat1: "A flexible system supporting 2-10 rows, 2-12 columns, and 1-6 color variations.", proj2_link: "Play on itch.io",
+                proj3_title: "Throw Master (Demo) - VR Game", proj3_desc: "A physics-based VR action game developed for Meta Quest.", proj3_feat1: "Precise controller tracking and realistic physics interactions.", proj3_feat2: "Immersive environments and haptic feedback.", proj3_link: "View on Meta Store",
+                proj4_title: "GameJam & UI/UX", proj4_desc: "Experiences in rapid prototyping and team-based game design.", proj4_feat1: "<strong>Goatlam 2024:</strong> Game development in 48 hours with a 3-person team.", proj4_feat2: "<strong>Chainly (Figma):</strong> Prototyped a user-friendly interface for logistics management.",
+                education_title: "Education",
+                edu1_uni: "Üsküdar University", edu1_degree: "B.Sc., Software Engineering (Expected Graduation: 2027)", edu1_loc: "Istanbul, Turkey",
+                edu2_school: "TED Konya College", edu2_field: "Mathematics & Science (2018 - 2022)", edu2_loc: "Konya, Turkey",
+                contact_title: "Get in Touch", contact_desc: "Feel free to contact me for new opportunities, collaborations, or just to say hello.", contact_button: "Send Email",
+                footer_text: "© 2025 Tolga Yıldız. All rights reserved.",
+            },
+            tr: {
+                nav_about: "Hakkımda", nav_skills: "Yetenekler", nav_experience: "Deneyim", nav_projects: "Projeler", nav_contact: "İletişim",
+                hero_subtitle: "Oyun Geliştirici (Unity / C#)",
+                hero_description: "Yenilikçi ve ilgi çekici interaktif deneyimler yaratma tutkusuna sahip, Unity (C#) odaklı bir Oyun Geliştiricisiyim.",
+                about_title: "Hakkımda",
+                about_text: "Yazılım Mühendisliği öğrencisi ve Unity (C#) odaklı bir Oyun Geliştiricisiyim. Google Play'de Firebase Leaderboards ve AdMob para kazanma entegrasyonuna sahip oyunlar yayınlama konusunda deneyimliyim. Optimizasyon, problem çözme ve çevik takım çalışması konularında yetenekliyim. Yenilikçi ve ilgi çekici interaktif deneyimler yaratma konusunda tutkuluyum.",
+                skills_title: "Teknik Yetenekler",
+                skills_cat1_title: "Programlama Dilleri", skills_cat1_list: "C#, C++, C, Java, Python, SQL (temel)",
+                skills_cat2_title: "Oyun Motorları & Frameworkler", skills_cat2_list1: "Unity (C#)", skills_cat2_list2: "Unreal Engine 4/5 (Blueprints & C++)", skills_cat2_list3: "Godot (isteğe bağlı)",
+                skills_cat3_title: "Geliştirme Araçları", skills_cat3_list1: "Firebase (Leaderboards, Analytics, Auth)", skills_cat3_list2: "AdMob, PlayFab, Cinemachine, DOTween", skills_cat3_list3: "Plastic SCM, Git",
+                skills_cat4_title: "Grafik & UI/UX Araçları", skills_cat4_list1: "Figma, Adobe Photoshop (temel)", skills_cat4_list2: "Blender (temel), Spine (2D animasyon)",
+                skills_cat5_title: "Temel Bilgiler & Teknikler", skills_cat5_list1: "Object-Oriented Programming (OOP)", skills_cat5_list2: "Veri Yapıları & Mobil Oyun Optimizasyonu", skills_cat5_list3: "Gerçek Zamanlı Çok Oyunculu Mantık", skills_cat5_list4: "VR/AR Geliştirme, Seviye Tasarımı",
+                skills_cat6_title: "Diller", skills_cat6_list1: "Türkçe (Anadil)", skills_cat6_list2: "İngilizce (Akıcı, C1)",
+                experience_title: "Deneyim",
+                exp1_date: "Yaz 2025", exp1_title: "Oyun Geliştirici Stajyeri", exp1_company: "UDO, Ankara, Türkiye", exp1_desc1: "Vitrin projesi için Unity (C#) ile temel oyun mekaniklerini geliştirdim ve optimize ettim.", exp1_desc2: "Scrum pratiklerini uygulayarak çevik bir ekip ortamında işbirliği yaptım.",
+                exp2_date: "Tem 2025 - Eyl 2025", exp2_title: "Oyun Geliştirici Stajyeri", exp2_company: "Craftian Makes, İstanbul, Türkiye", exp2_desc1: "Meta Quest için \"Throw Master (Demo)\" adlı VR aksiyon oyununu geliştirdim.", exp2_desc2: "Hassas kontrolcü takibi ve sürükleyici ortamlar üzerinde çalıştım.", exp2_desc3: "Gelişmiş haptik geri bildirim ve gerçekçi fizik tabanlı nesne tepkileri ile kullanıcı deneyimini iyileştirdim.",
+                projects_title: "Projeler",
+                proj1_title: "Sand Blast - Mobil Oyun", proj1_desc: "Gerçek zamanlı global lider tablosu (Firebase) ve AdMob para kazanma özelliklerine sahip bir Unity oyunudur.", proj1_feat1: "Gerçekçi kum fiziği ve optimize edilmiş parçacık efektleri.", proj1_feat2: "Akıcı mobil performans için object pooling tekniği uygulandı.", proj1_link: "Google Play'de Gör",
+                proj2_title: "Block Collapse - Puzzle Oyunu", proj2_desc: "Dinamik grid yönetimi, akıllı kilitlenme çözümü ve optimize edilmiş performansa sahip bir bulmaca oyunudur.", proj2_feat1: "2-10 satır, 2-12 sütun ve 1-6 renk varyasyonunu destekleyen esnek bir sistem.", proj2_link: "itch.io'da Oyna",
+                proj3_title: "Throw Master (Demo) - VR Oyunu", proj3_desc: "Meta Quest için geliştirilmiş, fizik tabanlı bir VR aksiyon oyunudur.", proj3_feat1: "Hassas kontrolcü takibi ve gerçekçi fizik etkileşimleri.", proj3_feat2: "Kullanıcıyı içine çeken ortamlar ve haptik geri bildirimler.", proj3_link: "Meta Store'da Gör",
+                proj4_title: "GameJam & UI/UX", proj4_desc: "Hızlı prototipleme ve takım tabanlı oyun tasarımı deneyimleri.", proj4_feat1: "<strong>Goatlam 2024:</strong> 48 saat içinde 3 kişilik bir ekiple oyun geliştirme.", proj4_feat2: "<strong>Chainly (Figma):</strong> Lojistik yönetimi için kullanıcı dostu bir arayüz prototipi.",
+                education_title: "Eğitim",
+                edu1_uni: "Üsküdar Üniversitesi", edu1_degree: "Lisans, Yazılım Mühendisliği (Beklenen Mezuniyet: 2027)", edu1_loc: "İstanbul, Türkiye",
+                edu2_school: "TED Konya Koleji", edu2_field: "Matematik & Fen (2018 - 2022)", edu2_loc: "Konya, Türkiye",
+                contact_title: "İletişime Geçin", contact_desc: "Yeni fırsatlar, işbirlikleri veya sadece bir merhaba demek için benimle iletişime geçmekten çekinmeyin.", contact_button: "E-posta Gönder",
+                footer_text: "© 2025 Tolga Yıldız. Tüm hakları saklıdır.",
+            }
+        };
+
+        const setLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) { el.innerHTML = translations[lang][key]; }
+            });
+            ['tr', 'en'].forEach(l => {
+                document.getElementById(`lang-${l}`).classList.toggle('active', l === lang);
+                document.getElementById(`lang-${l}-mobile`).classList.toggle('active', l === lang);
+            });
+        };
+        ['tr', 'en'].forEach(lang => {
+            document.getElementById(`lang-${lang}`).addEventListener('click', () => setLanguage(lang));
+            document.getElementById(`lang-${lang}-mobile`).addEventListener('click', () => setLanguage(lang));
+        });
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach((el, index) => {
+            el.style.setProperty('--reveal-delay', index);
+            observer.observe(el);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => { setLanguage('tr'); });
+    </script>
 </body>
 </html>
+
