@@ -16,6 +16,12 @@
             background-color: #1a1611; /* Koyu ahşap/deri rengi */
             background-image: url('https://www.transparenttextures.com/patterns/crissxcross.png');
             overflow-x: hidden;
+            /* Özel Orta Çağ Kılıcı Cursor (Eğimli) */
+            cursor: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 40 40'><g transform='rotate(-45 20 20)'><path d='M20 0 L23 28 H17 Z M12 27 L28 27 L26 31 H14 Z M18 31 H22 V 37 H18 Z M17 37 A 3 3 0 1 1 23 37 Z' fill='%23d1c7b8' stroke='%231a1611' stroke-width='2' stroke-linejoin='round'/></g></svg>") 0 0, auto;
+        }
+
+        a, button, .lang-btn {
+            cursor: pointer;
         }
 
         .font-cinzel {
@@ -164,7 +170,7 @@
     
     <canvas id="particle-canvas"></canvas>
 
-    <header class="bg-black/50 backdrop-blur-sm sticky top-0 z-50 border-b border-amber-800/50">
+    <header class="bg-black/50 backdrop-blur-sm sticky top-0 z-50 relative pb-4">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white tracking-wider font-cinzel">TOLGA YILDIZ</a>
             <div class="hidden md:flex items-center">
@@ -177,6 +183,14 @@
             </div>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2"><a href="#about" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a><a href="#skills" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a><a href="#experience" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a><a href="#projects" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a><a href="#contact" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a></div>
+        
+        <!-- Decorative Divider -->
+        <div class="absolute bottom-0 left-0 w-full text-amber-700" style="line-height: 0;">
+            <svg width="100%" height="20" viewBox="0 0 1200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 10 L20 10 C30 2, 40 18, 50 10 L550 10 C565 10, 575 0, 600 0 C625 0, 635 10, 650 10 L1150 10 C1160 18, 1170 2, 1180 10 L1200 10" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+                <path d="M600 0 L600 4" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+            </svg>
+        </div>
     </header>
 
     <main class="container mx-auto px-6 py-12">
@@ -374,7 +388,7 @@
     </footer>
 
     <script>
-        // --- Geliştirilmiş Alev Efekti ---
+        // --- Kıvılcım ve Alev Efekti ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -390,21 +404,49 @@
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.x;
             mouse.y = e.y;
-            // Mouse hareketinde daha fazla parçacık
-            if (particles.length < 200) { 
-                 for (let i = 0; i < 7; i++) {
-                    particles.push(new Particle(mouse.x, mouse.y));
+            if (particles.length < 200) { // Toplam parçacık limiti
+                 for (let i = 0; i < 5; i++) { 
+                    particles.push(new Spark(mouse.x, mouse.y));
                 }
             }
         });
 
-        class Particle {
+        // Kıvılcım Sınıfı (Mouse takip eden)
+        class Spark {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.speedX = Math.random() * 8 - 4;
+                this.speedY = Math.random() * 8 - 4;
+                this.size = Math.random() * 5 + 2;
+                this.life = 1;
+                this.lifeReduction = Math.random() * 0.04 + 0.03;
+                this.gravity = 0.2;
+            }
+            update() {
+                this.speedY += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= this.lifeReduction;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.speedX * 1.5, this.y - this.speedY * 1.5);
+                ctx.strokeStyle = 'hsl(50, 100%, ' + (this.life * 80 + 20) + '%)';
+                ctx.lineWidth = this.size * this.life;
+                ctx.stroke();
+            }
+        }
+
+        // Alev Sınıfı (Alttan yükselen)
+        class FlameParticle {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
                 this.size = Math.random() * 6 + 2; 
                 this.baseSize = this.size;
-                this.speedX = Math.random() * 4 - 2; 
+                this.speedX = Math.random() * 2 - 1; 
                 this.speedY = Math.random() * -2 - 1; 
                 this.colorValue = Math.random() * 40 + 10;
                 this.color = 'hsl(' + this.colorValue + ', 100%, 50%)';
@@ -415,9 +457,9 @@
             }
             update() {
                 this.sway += this.swaySpeed;
-                this.x += Math.sin(this.sway) + this.speedX;
+                this.x += Math.sin(this.sway); // Alev salınımı
                 this.y += this.speedY;
-                this.speedY += 0.04; 
+                this.speedY += 0.02; // Hafif yavaşlama/yükselme
                 
                 if (this.size > 0.2) {
                     this.size -= (this.baseSize / 50); 
@@ -437,12 +479,12 @@
                 ctx.fill();
             }
         }
-
+        
         function handleParticles() {
             for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].update();
                 particles[i].draw();
-                if (particles[i].life <= 0 || particles[i].size <= 0.2) {
+                if (particles[i].life <= 0 || particles[i].size <= 0) {
                     particles.splice(i, 1);
                 }
             }
@@ -450,14 +492,15 @@
 
         function animateParticles() {
             ctx.globalCompositeOperation = 'source-over';
-            ctx.fillStyle = 'rgba(26, 22, 17, 0.3)'; // Solma hızı daha da artırıldı
+            ctx.fillStyle = 'rgba(26, 22, 17, 0.2)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             ctx.globalCompositeOperation = 'lighter';
 
+            // Sürekli yükselen alevleri ekle
             if (particles.length < 200 && Math.random() > 0.85) { 
                 const x = Math.random() * canvas.width;
-                particles.push(new Particle(x, canvas.height + 20)); 
+                particles.push(new FlameParticle(x, canvas.height + 20)); 
             }
 
             handleParticles();
@@ -483,7 +526,9 @@
                 skills_cat5_title: "Core Knowledge & Techniques", skills_cat5_list1: "Object-Oriented Programming (OOP)", skills_cat5_list2: "Data Structures & Mobile Game Optimization", skills_cat5_list3: "Real-time Multiplayer Logic", skills_cat5_list4: "VR/AR Development, Level Design",
                 skills_cat6_title: "Languages", skills_cat6_list1: "Turkish (Native)", skills_cat6_list2: "English (Fluent, C1)",
                 experience_title: "Experience",
-                exp1_date: "Summer 2025", exp1_title: "Game Developer Intern", exp1_company: "UDO, Ankara, Turkey", exp1_desc1: "Developed and optimized core gameplay mechanics in Unity (C#) for a showcase-selected project.", exp1_desc2: "Collaborated in an agile team environment, applying Scrum practices.",
+                exp1_date: "Summer 2025", exp1_title: "Game Developer Intern", exp1_company: "UDO, Ankara, Turkey", 
+                exp1_desc1: "During my internship, I took on the Game Developer role, actively participating in developing the game's core infrastructure and implementing its main mechanics.", 
+                exp1_desc2: "This process provided a significant opportunity for technical growth and gave me hands-on experience in an agile team environment.",
                 exp2_date: "Jul 2025 - Sep 2025", exp2_title: "Game Developer Intern", exp2_company: "Craftian Makes, Istanbul, Turkey", exp2_desc1: "Developed 'Throw Master (Demo)', a VR action game for Meta Quest.", exp2_desc2: "Focused on precise controller tracking and immersive environments.", exp2_desc3: "Enhanced user immersion through refined haptic feedback and realistic physics-based object responses.",
                 projects_title: "Projects",
                 proj1_title: "Sand Blast - Mobile Game", proj1_desc: "A Unity game with a real-time global leaderboard (Firebase) and AdMob monetization.", proj1_feat1: "Realistic sand physics and optimized particle effects.", proj1_feat2: "Object pooling technique implemented for smooth mobile performance.", proj1_link: "View on Google Play",
@@ -510,7 +555,9 @@
                 skills_cat5_title: "Temel Bilgiler & Teknikler", skills_cat5_list1: "Object-Oriented Programming (OOP)", skills_cat5_list2: "Veri Yapıları & Mobil Oyun Optimizasyonu", skills_cat5_list3: "Gerçek Zamanlı Çok Oyunculu Mantık", skills_cat5_list4: "VR/AR Geliştirme, Seviye Tasarımı",
                 skills_cat6_title: "Diller", skills_cat6_list1: "Türkçe (Anadil)", skills_cat6_list2: "İngilizce (Akıcı, C1)",
                 experience_title: "Deneyim",
-                exp1_date: "Yaz 2025", exp1_title: "Oyun Geliştirici Stajyeri", exp1_company: "UDO, Ankara, Türkiye", exp1_desc1: "Vitrin projesi için Unity (C#) ile temel oyun mekaniklerini geliştirdim ve optimize ettim.", exp1_desc2: "Scrum pratiklerini uygulayarak çevik bir ekip ortamında işbirliği yaptım.",
+                exp1_date: "Yaz 2025", exp1_title: "Oyun Geliştirici Stajyeri", exp1_company: "UDO, Ankara, Türkiye", 
+                exp1_desc1: "Stajım süresince Game Developer rolüyle, oyunun temel altyapısını geliştirmede ve ana mekaniklerin hayata geçirilmesinde aktif görev aldım.", 
+                exp1_desc2: "Bu süreç bana hem teknik anlamda önemli bir gelişim kaydetme hem de çevik bir ekip içinde çalışma pratiği kazanma fırsatı sundu.",
                 exp2_date: "Tem 2025 - Eyl 2025", exp2_title: "Oyun Geliştirici Stajyeri", exp2_company: "Craftian Makes, İstanbul, Türkiye", exp2_desc1: "Meta Quest için \"Throw Master (Demo)\" adlı VR aksiyon oyununu geliştirdim.", exp2_desc2: "Hassas kontrolcü takibi ve sürükleyici ortamlar üzerinde çalıştım.", exp2_desc3: "Gelişmiş haptik geri bildirim ve gerçekçi fizik tabanlı nesne tepkileri ile kullanıcı deneyimini iyileştirdim.",
                 projects_title: "Projeler",
                 proj1_title: "Sand Blast - Mobil Oyun", proj1_desc: "Gerçek zamanlı global lider tablosu (Firebase) ve AdMob para kazanma özelliklerine sahip bir Unity oyunudur.", proj1_feat1: "Gerçekçi kum fiziği ve optimize edilmiş parçacık efektleri.", proj1_feat2: "Akıcı mobil performans için object pooling tekniği uygulandı.", proj1_link: "Google Play'de Gör",
