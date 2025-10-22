@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tolga Yıldız | Oyun Geliştirici</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,14 +13,14 @@
         body {
             font-family: 'Lora', serif;
             color: #d1c7b8; /* Eskitilmiş kağıt rengi */
-            background-color: #1a11; /* Koyu ahşap/deri rengi */
-            background-image: url('https://www.transparenttextures.com/patterns/crissxcross.png');
+            background-color: #1a110f; /* Koyu ahşap/deri rengi (düzeltildi) */
+            /* background-image: url('https://www.transparenttextures.com/patterns/crissxcross.png'); (Kaldırıldı) */
             overflow-x: hidden;
             /* Özel, Küçültülmüş SVG Kılıç İmleci */
             cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAACfZJREFUeJztmn9QE2cexp9sNj8AG46SEEKoIAbwIvZkUmip4k+KP9ArKirggAWrnC04cxxqx5njD+no0SsKWqw0pydqUdsRRXtXlbGiMr3piJZaOxQJntoEgiEmEElMdpPcH+cyq8c5oAIhd89/+2ve9/ns83733d0X+B8Xh73hdrs39B/gcHaNSo9GWP0AWOb3Avhd/wleDoJgb9TX13+9bdu2y/v27QszGAz78UQqvFGPAZgwYYL57t27Ea2trYX5+fk/1tfX34aXQ3gMgEKhyBAIBA0GgwETJkwIz8/PP1leXi6HF0MYqAjuWbp0qUYoFIbdu3cPLpcL06ZNO1RSUtLUf5EX1QVigH3vpaWlLWttbTU7nU6MGzcOzc3NWRs3bpz3qEB6VRo4T+5gzH344YeWb7/99lOBQCBwu93o7u6GSqU6V1FRsQjAenhJEv4DAFgQ3n///YD29vY/kiTJtVqtcLvdiIqKulRVVTULQAG8AMJAQ6DfVGVlpSk6OvrPIpHIxeVy4XK5YDQaZ6Smpl7v6uo6Ci8YDgMmgBFjrqCgQHHr1q0CmqYBADweDwKBoK2qqmqmWCxejjGchAETwIgxtXv3bo1SqSzl8XgICgqC0+mE2+2OLCoquqTRaGoxhpPw1AQwYsytWrXq9b6+vky73Q6XywU+nw+Xy3Vn69atc1UqVQrGYBIGBQAsCEuWLJkNIJUgCJAkCQAwGo360tLS2SqVKhljDMKgAeDxJKT09PQk83g8BAcHw263w2azabOysuYuXLhwPsYQhKfWgCfFmCosLFwUGhraSNM0TCYT9Ho9KIoKraqqOn/mzJmzGEM1YUgJAMuYwWDYn5OT8x1BEEqKosDj8eDr6wuTyaTLy8v77dKlS6djDCRhSAkAy5BEIsktKSmZxefzfxQKhXA4HHA6nQgKCpKXl5efU6vVP2AMJGHIAMCCEBsbm7F+/frZXC73BofDAZ/Ph8PhQFBQUGBtbe3xQ4cO3YCHQxjyEGCLMXbu3Lmjhw8fvmC1WpVcLhf+/v4wmUwwm82WBQsWbCgsLBTBQ4fDMyWAEWMoOTk5fdmyZfM7Ozs7HA4HTCYTAEAsFr907dq1yj179pjhoUl4LgBgQXj77beXrF27di5BEJ08Hg96vR5OpxP37t3zPXXq1Gfbt28XwgMhPNcQYIsxVlFR8V19fX2dn5+flKZpWK1WSKVSdHV1YerUqfu3b9/+Q3/jHjAkXhgAsCB88sknV8+cOXOCoigJAFitVsjlchiNRiiVytMVFRXLPOWbwgsFABaErVu33tFoNIdNJtM4u90Oi8UCiUQCp9OJ6Ojob7Zs2ZIqFotzMMoQnrsGPCnGTHFxcZhIJCrv7e11ORwO+Pr6QqfTweVy4eLFi3PKysrq79+/fwCjXBdeeAIYMaaysrKm3rx5MycmJgadnZ0wGo0ICAiA0+mEXC7X7NixQ/Xyyy+/g1FKwrABAAvC8uXLE8xmc7pUKkVPTw8oigJFUXC5XJgyZUrrpk2b5oaGhi7DKEAYVgBgQVi8eHFyb29vikQigc1mA0VREAqFIEkSgYGBd1avXj1n+vTpizDCEF54DXhSjJnTp08vjoyM/NrhcMDHxwdmsxkWiwUURaGtrS1MrVZfamxs/AojXBOGHQBLBR988MESsVh82WAwICwsDAEBASAIAiEhIdDpdPIDBw5cuHr16kmMIIQRAcCkQKFQ5H300UcpMTExTVqtFiKRCA8fPkRkZCTcbjc6OjrG79y58++3b98+iBGCMGIJYCCIxeKczZs3JyckJFxva2sDSZLo7u6GTCYDTdPQ6XSTy8rKvgCwe0T6NRKNsMXc1StXrnxRWVl5QavVTqIoCgRBgMP5d3f4fD5iYmL2fvzxxy0Y5qI4kjUAYJmJi4tbsW7duplSqfQql8sFTdOw2+2gaRoGgwEajWbtrl27OBjmoTDiCWDEmNJqtepNmzZ92d7enhIQEAAej9f/dcnPz8+enp6ek5GRIcEwJWHUAOCJO5uenh6p1+vfpShKSBAEfHx8YLVaIZPJrGlpae+sXLlSxpz7IkGMKgBGDIiSkhJ9c3PzHqfTGeh2u2Gz2dDd3Y3Q0FD6tddeUxcXF/8eQB5eIASPAAAWhCNHjpw/evToNw8fPgwKDAwERVFobW2FTCZDbGzsj7m5uQuioqIGnDY/yyo3jwEAloFjx47V19TUNBAEERQSEgIAaGpqQnBwMEJCQroSExNTMjMzp4FllGW+aigpGfGnwNPEdHjlypVvJSYm5vJ4PFtLSwsIgsCbb76JO3fuoL29XVpXV3fy8uXLX+KRcdZLV3h4ePiNmpqausG26VEAwIJQVFQ0USqV7g0ODsbPP/8Mh8OBmTNnwmQywW63hzY0NBxmluwAgNlsPujv758eFxcXRNO0e7DteRwAPP5b/g80TX9HkiSampogFAqRkJAArVaL69evz9m4ceOVurq6VgB7cnNzT/j6+soIgjiQnZ2dOui2htXJc4iJdXV19d+OHDlyyWazhQgEAiQlJaGxsREulwsdHR0AgKioqF6HwyHS6/X6gwcPhisUirzBFkGPTABYKVi9enVKTk7ObLFY/D0A1NbW4pVXXsEvv/wCuVwOkiThdDpFfX19mDx58ucKhSJvKO14LAA8XhTnHz9+PF6lUn1OkiQiIyOhVCpBURT4fD78/f2RlJR0Wa1W38UQ5wgeDQCPm3lvw4YN60iSvNvR0QGCIBAREYGpv5kCoYDnWrNmTSaeYYLk8QDAMiWTyd6NiIj4ifnEHhsbizfiVbh9q41YlblCjWd4cRoTAFim/mKz2XwsFgsmTpxo5nK5ZRcuXvrKarW6Td3G+XNnTp+PIULweACMmbNnz34/adKkFg6HMys8PFxvsVh25Obm3t23/2C9/6/En4fIgtH3oGdBUmL8QgwBgscDAIDS0tJ/VldXnwoMDAzu6uq6kpCQsGjLli09zPETdaeuvPSSaD+f4IDjds+bOy3+LQwSwpgAEBcXd81kMl3My8t74/z584dTUlL63wOY+lBdc+yHyTGvqv18fNFt7F6UnbHidQwCgsdOhBgNZGCgSs+ctyY7U9Fy46cCm8OBuLjX93721wMtg7neK8S8GG0uLCxSvap0KyPC3Kmpi09qNBrFo2Mc5hwGmMcnYKhijJX9aZu1+WqT+h/XvseUV6eCpukemqbvy+Xy3hkzZqzLzs5+g8Ph7PI6AGBBSE1NfTc8PHxKQ0MDOBwO4uPjbxYWFs6Ojo5Ow6OhMCaK4FDF+hFzzWazYfz48YiOjsa8efMy2OYxVp4Cz6pZs2adEwgEkEgkRoFA8OlAizfJUe3hMOvBgwchQqFQV1xc/Ov/thrFqxOg0+n8k5KS8p+2FMcriyAGmD947bP//3pO/QsiD4dzzz350AAAAABJRU5ErkJggg==) 0 0, auto;
         }
 
-        a, button, .lang-btn {
+ a, button, .lang-btn {
             cursor: pointer;
         }
 
@@ -28,6 +28,8 @@
             font-family: 'Cinzel', serif;
         }
 
+        /* body::before ve @keyframes move-glow animasyonu mobil performansı artırmak ve sadeleştirmek için kaldırıldı. */
+        /*
         body::before {
             content: '';
             position: fixed;
@@ -46,6 +48,7 @@
             from { transform: translate(-25%, -25%); }
             to { transform: translate(25%, 25%); }
         }
+        */
 
         #particle-canvas {
             position: fixed;
@@ -164,9 +167,19 @@
         .dagger-svg .rivet {
             fill: #d4af37;
         }
+
+        /* YENİ EKLENEN GÖRSEL STİLLERİ */
+        .project-image-container {
+            @apply rounded-sm overflow-hidden border border-[#c9b79c] shadow-md;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.15);
+        }
+        .project-image {
+            @apply w-full h-auto object-cover block; /* 'block' alt boşluğu kaldırır */
+        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-300">
+<!-- bg-slate-900 sınıfı kaldırıldı, böylece <style> içindeki #1a110f rengi geçerli olacak -->
+<body class="text-slate-300">
     
     <canvas id="particle-canvas"></canvas>
 
@@ -227,14 +240,16 @@
             <h2 class="section-title" data-lang-key="experience_title"></h2>
             <div class="max-w-4xl mx-auto relative border-l-2 border-amber-800/30 pl-10">
                 <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/70" data-lang-key="exp1_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp1_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp1_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp1_desc1"></li><li data-lang-key="exp1_desc2"></li></ul></div>
-                <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/70" data-lang-key="exp2_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp2_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp2_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp2_desc1"></li><li data-lang-key="exp2_desc2"></li><li data-lang-key="exp2_desc3"></li></ul></div>
+                <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/7Remember the current time is 2025-10-22 21:06:58.70" data-lang-key="exp2_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp2_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp2_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp2_desc1"></li><li data-lang-key="exp2_desc2"></li><li data-lang-key="exp2_desc3"></li></ul></div>
             </div>
         </section>
 
         <section id="projects" class="py-20 w-full overflow-hidden">
             <h2 class="section-title" data-lang-key="projects_title"></h2>
             <div class="projects-container">
-                <!-- Proje 1 --><div class="project-card reveal">
+                
+                <!-- Proje 1 -->
+                <div class="project-card reveal">
                     <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
@@ -260,103 +275,146 @@
                         <circle class="rivet" cx="50" cy="130" r="2"/>
                         <circle class="rivet" cx="50" cy="155" r="2"/>
                     </svg>
+                    
+                    <!-- YENİ GÖRSEL ALANI -->
+                    <div class="project-image-container mb-4">
+                        <img src="SandBlast.png" 
+                             alt="Sand Blast Proje Resmi" 
+                             class="project-image"
+                             onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
+                    </div>
+
                     <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj1_title"></h3>
                     <p class="mb-4 text-sm" data-lang-key="proj1_desc"></p>
                     <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj1_feat1"></li><li data-lang-key="proj1_feat2"></li></ul>
                     <a href="https://play.google.com/store/apps/details?id=togi.games" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold"><span data-lang-key="proj1_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
                 </div>
-                <!-- Proje 2 --><div class="project-card reveal">
+
+                <!-- Proje 2 -->
+                <div class="project-card reveal">
                      <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
                          <defs>
-                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
-                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
-                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
-                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
-                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
-                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
-                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
-                                <feMerge>
-                                    <feMergeNode in="shadow"/>
-                                    <feMergeNode in="light"/>
-                                    <feMergeNode in="dark"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
-                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
-                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
-                        <circle class="pommel" cx="50" cy="180" r="7"/>
-                        <circle class="rivet" cx="50" cy="130" r="2"/>
-                        <circle class="rivet" cx="50" cy="155" r="2"/>
-                    </svg>
+                             <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                 <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                 <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                 <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                 <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                 <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                 <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                 <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                 <feMerge>
+                                     <feMergeNode in="shadow"/>
+                                     <feMergeNode in="light"/>
+                                     <feMergeNode in="dark"/>
+                                     <feMergeNode in="SourceGraphic"/>
+                                 </feMerge>
+                             </filter>
+                         </defs>
+                         <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                         <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                         <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                         <circle class="pommel" cx="50" cy="180" r="7"/>
+                         <circle class="rivet" cx="50" cy="130" r="2"/>
+                         <circle class="rivet" cx="50" cy="155" r="2"/>
+                     </svg>
+
+                    <!-- YENİ GÖRSEL ALANI -->
+                    <div class="project-image-container mb-4">
+                        <img src="https://img.itch.zone/aW1nLzIwMTg1MTY3LnBuZw==/original/l66z6u.png" 
+                             alt="Block Collapse Proje Resmi" 
+                             class="project-image"
+                             onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
+                    </div>
+
                     <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj2_title"></h3>
                     <p class="mb-4 text-sm" data-lang-key="proj2_desc"></p>
                     <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj2_feat1"></li></ul>
                     <a href="https://togiss.itch.io/casegame" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold"><span data-lang-key="proj2_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
                 </div>
-                <!-- Proje 3 --><div class="project-card reveal">
+
+                <!-- Proje 3 -->
+                <div class="project-card reveal">
                     <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
                          <defs>
-                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
-                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
-                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
-                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
-                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
-                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
-                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
-                                <feMerge>
-                                    <feMergeNode in="shadow"/>
-                                    <feMergeNode in="light"/>
-                                    <feMergeNode in="dark"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
-                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
-                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
-                        <circle class="pommel" cx="50" cy="180" r="7"/>
-                        <circle class="rivet" cx="50" cy="130" r="2"/>
-                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                             <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                 <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                 <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                 <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                 <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                 <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                 <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                 <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                 <feMerge>
+                                     <feMergeNode in="shadow"/>
+                                     <feMergeNode in="light"/>
+                                     <feMergeNode in="dark"/>
+                                     <feMergeNode in="SourceGraphic"/>
+                                 </feMerge>
+                             </filter>
+                         </defs>
+                         <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                         <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                         <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                         <circle class="pommel" cx="50" cy="180" r="7"/>
+                         <circle class="rivet" cx="50" cy="130" r="2"/>
+                         <circle class="rivet" cx="50" cy="155" r="2"/>
                     </svg>
+                    
+                    <!-- YENİ GÖRSEL ALANI -->
+                    <div class="project-image-container mb-4">
+                        <img src="https://scontent.oculuscdn.com/v/t64.5771-25/491830599_814387924377189_6155401918573155214_n.jpg?stp=dst-jpg_q92_s1440x1440_tt6&_nc_cat=100&ccb=1-7&_nc_sid=6e7a0a&_nc_ohc=Cxy_pco5f24Q7kNvwFFlmML&_nc_oc=AdmlsCfXnCZk_KnalDuh7DHeowP-ZkNew-Naiiic7aWOh3qX15sfRpwHvL3Ntc6X26U&_nc_zt=3&_nc_ht=scontent.oculuscdn.com&oh=00_AfdYZkJH9ATNTAyPpKjn5xyajV2iYTDLX2NizS8cwBgvjQ&oe=68FEE373" 
+                             alt="Throw Master Proje Resmi" 
+                             class="project-image"
+                             onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
+                    </div>
+
                     <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj3_title"></h3>
                     <p class="mb-4 text-sm" data-lang-key="proj3_desc"></p>
                     <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj3_feat1"></li><li data-lang-key="proj3_feat2"></li></ul>
                     <a href="https://www.meta.com/experiences/24337675112595406/" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold"><span data-lang-key="proj3_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
                 </div>
-                <!-- Proje 4 --><div class="project-card reveal">
+
+                <!-- Proje 4 -->
+                <div class="project-card reveal">
                     <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
                          <defs>
-                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
-                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
-                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
-                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
-                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
-                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
-                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
-                                <feMerge>
-                                    <feMergeNode in="shadow"/>
-                                    <feMergeNode in="light"/>
-                                    <feMergeNode in="dark"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
-                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
-                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
-                        <circle class="pommel" cx="50" cy="180" r="7"/>
-                        <circle class="rivet" cx="50" cy="130" r="2"/>
-                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                             <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                 <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                 <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                 <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                 <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                 <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                 <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                 <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                 <feMerge>
+                                     <feMergeNode in="shadow"/>
+                                     <feMergeNode in="light"/>
+                                     <feMergeNode in="dark"/>
+                                     <feMergeNode in="SourceGraphic"/>
+                                 </feMerge>
+                             </filter>
+                         </defs>
+                         <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                         <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                         <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                         <circle class="pommel" cx="50" cy="180" r="7"/>
+                         <circle class="rivet" cx="50" cy="130" r="2"/>
+                         <circle class="rivet" cx="50" cy="155" r="2"/>
                     </svg>
+                    
+                    <!-- YENİ GÖRSEL ALANI -->
+                    <div class="project-image-container mb-4">
+                        <img src="https://placehold.co/320x180/3d2b1f/f0e6d2?text=GameJam+%26+UI/UX" 
+                             alt="GameJam & UI/UX Proje Resmi" 
+                             class="project-image"
+                             onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
+                    </div>
+
                     <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj4_title"></h3>
                     <p class="mb-4 text-sm" data-lang-key="proj4_desc"></p>
                     <ul class="list-disc list-inside mb-4 text-sm"><li data-lang-key="proj4_feat1"></li><li data-lang-key="proj4_feat2"></li></ul>
                 </div>
+
             </div>
         </section>
 
@@ -406,8 +464,8 @@
             mouse.y = e.y;
             if (particles.length < 200) { // Toplam parçacık limiti
                  for (let i = 0; i < 3; i++) { 
-                    particles.push(new Spark(mouse.x, mouse.y));
-                }
+                     particles.push(new Spark(mouse.x, mouse.y));
+                 }
             }
         });
 
@@ -492,8 +550,14 @@
 
         function animateParticles() {
             ctx.globalCompositeOperation = 'source-over';
-            ctx.fillStyle = 'rgba(26, 22, 17, 0.2)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            /* İzi kaldıran değişiklik:
+               Eski kod (iz bırakıyordu):
+               ctx.fillStyle = 'rgba(26, 22, 17, 0.2)';
+               ctx.fillRect(0, 0, canvas.width, canvas.height);
+            */
+            // Yeni kod (her kareyi temizler, iz bırakmaz):
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             ctx.globalCompositeOperation = 'lighter';
 
@@ -607,6 +671,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
