@@ -90,7 +90,7 @@
             color: #3d2b1f;
             border: 1px solid #c9b79c;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.1);
-            padding: 4.5rem 1.5rem 1.5rem 1.5rem; 
+            padding: 4.5rem 1.5rem 1.5rem 1.5rem;  
             border-radius: 4px;
             transform-style: preserve-3d;
         }
@@ -127,15 +127,151 @@
         .project-image-container {
             box-shadow: inset 2px 2px 5px rgba(0,0,0,0.15);
         }
+
+        /* --- YENİ OYUN STİLLERİ --- */
+        .monster {
+            position: absolute;
+            font-size: 3rem; /* 48px */
+            cursor: inherit;
+            user-select: none;
+            filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.7));
+            animation: spawn 0.3s ease-out, move 3s linear infinite alternate;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .monster.dying {
+    animation: none; /* Hareketi durdur */
+    transform: scale(0.8); /* Hafifçe küçülsün */
+    opacity: 0;
+    /* Geçişi çok daha hızlı yapıyoruz */
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+        @keyframes spawn {
+            from { transform: scale(0.1); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(30px, 15px); }
+        }
+
+        /* YENİ: Canavara vurma efekti */
+        .monster.hit {
+            transform: scale(1.1);
+            filter: brightness(1.5);
+            transition: all 0.05s;
+        }
+
+        /* YENİ: Boss stilleri */
+        .boss {
+            font-size: 8rem; /* 128px */
+            animation: spawn 0.5s ease-out, move 5s linear infinite alternate;
+            /* YENİ: Zayıf noktaların konumlanması için eklendi */
+            position: relative; 
+        }
+
+        /* YENİ: Zayıf nokta stilleri */
+        .weak-spot {
+            position: absolute;
+            font-size: 1.5rem; /* 24px */
+            cursor: inherit;
+            filter: drop-shadow(0 0 8px yellow);
+            animation: pulse 1s infinite;
+            /* Vuruşların gövdeye değil, zayıf noktaya gitmesini sağlar */
+            pointer-events: auto; 
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* YENİ: Boss süre sayacı animasyonu */
+        .boss-timer-active {
+            animation: deplete-timer 10s linear forwards;
+        }
+        @keyframes deplete-timer {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        /* YENİ: Can Barı Stilleri */
+        .hp-bar {
+            position: absolute;
+            top: -12px; /* Emoji'nin biraz üstü */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 40px; /* Çok büyümesin */
+            height: 6px;
+            background-color: #3f3f46; /* Koyu arkaplan */
+            border: 1px solid #18181b;
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .hp-bar-inner {
+            height: 100%;
+            background-color: #4ade80; /* Yeşil can */
+            transition: width 0.1s linear;
+        }
+
+        /* Boss can barı konumu ve boyutu */
+        .boss .hp-bar {
+            top: -15px; 
+            width: 100%;
+            max-width: 120px;
+            height: 12px;
+            border-width: 2px;
+            /* YENİ: Can barını 15 piksel sola kaydırarak hizalıyoruz */
+            transform: translateX(calc(-50% - 15px));
+        }
+        .boss .hp-bar-inner {
+            background-color: #f87171; /* Boss canı kırmızı */
+        }
+
+        /* --- YENİ: "POF" EFEKTİ STİLLERİ --- */
+        .puff-effect {
+            position: absolute;
+            font-size: 2rem; /* Boyutunu ayarlayın */
+            opacity: 0;
+            transform: scale(0.5);
+            animation: puff-explode 0.4s ease-out forwards;
+            pointer-events: none; /* Tıklamayı engelle */
+            z-index: 100;
+        }
+
+        @keyframes puff-explode {
+            0% { opacity: 1; transform: scale(0.5); filter: hue-rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.5); filter: hue-rotate(90deg); }
+            100% { opacity: 0; transform: scale(2); filter: hue-rotate(180deg); }
+        }
+        /* --- / YENİ OYUN STİLLERİ --- */
+
     </style>
 </head>
 <body class="text-slate-300">
     
+    <div id="game-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 49; pointer-events: none; overflow: hidden;"></div>
+
+    <div id="boss-timer" class="hidden fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-md h-3 z-[100] bg-gray-700/50 rounded-full overflow-hidden">
+        <div id="boss-timer-bar" class="h-full bg-red-600" style="width: 100%;"></div>
+    </div>
+
     <canvas id="particle-canvas"></canvas>
 
     <header class="bg-black/50 backdrop-blur-sm sticky top-0 z-50 relative pb-4">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white tracking-wider font-cinzel">TOLGA YILDIZ</a>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <a href="#" class="text-xl sm:text-2xl font-bold text-white tracking-wider font-cinzel">TOLGA YILDIZ</a>
+                <button id="play-game-btn" class="text-amber-300 hover:text-amber-100 transition-colors" title="Oyunu Başlat">
+                    <i data-lucide="gamepad-2" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                </button>
+                <span id="score-display" class="hidden text-white font-cinzel text-base sm:text-lg">Skor: 0</span>
+                </div>
+
             <div class="hidden md:flex items-center">
                 <div class="flex space-x-6 text-lg"><a href="#about" class="hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a><a href="#skills" class="hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a><a href="#experience" class="hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a><a href="#projects" class="hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a><a href="#contact" class="hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a></div>
                 <div class="ml-8 flex items-center space-x-2 border-l border-amber-800/50 pl-6 text-sm"><button id="lang-tr" class="lang-btn active">TR</button><span class="text-slate-500">/</span><button id="lang-en" class="lang-btn">EN</button></div>
@@ -225,7 +361,7 @@
                     </svg>
                     
                     <div class="project-image-container rounded-sm overflow-hidden border border-[#c9b79c] shadow-md mb-4">
-                        <img src="SandBlast.png" 
+                        <img src="https://via.placeholder.com/320x180/3d2b1f/f0e6d2?text=Sand+Blast" 
                              alt="Sand Blast Proje Resmi" 
                              class="project-image w-full h-auto object-cover block"
                              onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
@@ -370,7 +506,7 @@
         <section id="contact" class="py-20 text-center reveal">
             <h2 class="text-4xl font-bold text-amber-300 mb-12 text-center font-cinzel tracking-widest" data-lang-key="contact_title"></h2>
             <p class="max-w-2xl mx-auto text-lg mb-8" data-lang-key="contact_desc"></p>
-            <a href="mailto:tolgayilddiz@gmail.com" class="inline-block bg-amber-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors shadow-[0_0_20px_theme(colors.amber.600/50%)] hover:shadow-[0_0_30px_theme(colors.amber.600/70%)] font-cinzel" data-lang-key="contact_button"></a>
+            <a href="mailto:tolgayilddiz@gmail.com" class="inline-block bg-amber-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] font-cinzel" data-lang-key="contact_button"></a>
         </section>
 
     </main>
@@ -404,7 +540,7 @@
             mouse.x = e.x;
             mouse.y = e.y;
             if (particles.length < 200) { // Toplam parçacık limiti
-                 for (let i = 0; i < 3; i++) { 
+                 for (let i = 0; i < 3; i++) {  
                      particles.push(new Spark(mouse.x, mouse.y));
                  }
             }
@@ -437,16 +573,48 @@
                 ctx.stroke();
             }
         }
-
+// YENİ: Patlama Parçacığı Sınıfı
+        class DeathParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                // Sağa, sola, yukarı, aşağı rastgele bir hızla saçılır
+                this.speedX = Math.random() * 12 - 6;
+                this.speedY = Math.random() * 12 - 6;
+                this.size = Math.random() * 4 + 2; // Parçacık boyutu
+                this.life = 1; // Yaşam süresi (1 = %100)
+                this.lifeReduction = Math.random() * 0.02 + 0.02; // Ne kadar hızlı kaybolacağı
+                this.gravity = 0.1; // Yer çekimi
+                // Kırmızı-Turuncu-Sarı tonlarında rastgele bir renk
+                this.color = 'hsl(' + (Math.random() * 60) + ', 100%, 55%)';
+            }
+            update() {
+                this.speedY += this.gravity; // Yer çekimi uygula
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= this.lifeReduction; // Yaşam süresini azalt
+            }
+            draw() {
+                ctx.beginPath();
+                // HATA DÜZELTMESİ: Yarıçapın asla negatif olmamasını sağlıyoruz.
+                const radius = Math.max(0, this.size * this.life);
+                ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                // Saydamlığın da 0'ın altına düşmediğinden emin olalım.
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.fill();
+                ctx.globalAlpha = 1; // Diğer çizimler için alfasayı sıfırla
+            }
+        }
         // Alev Sınıfı (Alttan yükselen)
         class FlameParticle {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 3 + 2; 
+                this.size = Math.random() * 3 + 2;  
                 this.baseSize = this.size;
-                this.speedX = Math.random() * 2 - 1; 
-                this.speedY = Math.random() * -2 - 1; 
+                this.speedX = Math.random() * 2 - 1;  
+                this.speedY = Math.random() * -2 - 1;  
                 this.colorValue = Math.random() * 40 + 10;
                 this.color = 'hsl(' + this.colorValue + ', 100%, 50%)';
                 this.life = 1;
@@ -461,7 +629,7 @@
                 this.speedY += 0.02; // Hafif yavaşlama/yükselme
                 
                 if (this.size > 0.2) {
-                    this.size -= (this.baseSize / 50); 
+                    this.size -= (this.baseSize / 50);  
                 }
 
                 this.life -= this.lifeReduction;
@@ -496,9 +664,9 @@
             ctx.globalCompositeOperation = 'lighter';
 
             // Sürekli yükselen alevleri ekle
-            if (particles.length < 200 && Math.random() > 0.85) { 
+            if (particles.length < 200 && Math.random() > 0.85) {  
                 const x = Math.random() * canvas.width;
-                particles.push(new FlameParticle(x, canvas.height + 20)); 
+                particles.push(new FlameParticle(x, canvas.height + 20));  
             }
 
             handleParticles();
@@ -601,7 +769,386 @@
             observer.observe(el);
         });
 
-        document.addEventListener('DOMContentLoaded', () => { setLanguage('tr'); });
+        document.addEventListener('DOMContentLoaded', () => { 
+            
+            // --- YENİ: GİZLİ OYUN KODU ---
+            const playButton = document.getElementById('play-game-btn');
+            const scoreDisplay = document.getElementById('score-display');
+            const gameContainer = document.getElementById('game-container');
+            // YENİ: Boss sayacı elementleri
+            const bossTimerContainer = document.getElementById('boss-timer');
+            const bossTimerBar = document.getElementById('boss-timer-bar');
+
+            let isGameActive = false;
+            let score = 0;
+            let gameInterval = null;
+            // YENİ: Boss durumu ve sayaç
+            let isBossActive = false;
+            let bossTimerTimeout = null;
+
+            // YENİ: Oyun sabitleri
+            const BOSS_SCORE_THRESHOLD = 10; // 10 skorda boss çıkar
+            const BOSS_HEALTH = 100; // Boss canı 100
+            const BOSS_TIME_LIMIT = 10000; // 10 saniye
+            const MONSTER_HEALTH = 3;
+            const NORMAL_DAMAGE = 1; // Normal vuruş hasarı
+            const WEAK_SPOT_DAMAGE = 5; // Zayıf nokta hasarı
+
+            // Kullanıcının istediği mistik canavarlar (ve biraz daha fazlası)
+            const monsterTypes = ['👹', '🐉', '🧛', '👺', '👻', '👽', '💀', '🎃']; 
+            const spawnRate = 1200; // ms cinsinden spawn olma sıklığı
+            const monsterLife = 2500; // ms cinsinden canavarın ekranda kalma süresi
+
+            function updateScoreDisplay() {
+                scoreDisplay.innerText = `Skor: ${score}`;
+
+                // YENİ: Boss çağırma kontrolü
+                if (score >= BOSS_SCORE_THRESHOLD && !isBossActive && isGameActive) {
+                    spawnBoss();
+                }
+            }
+
+            // YENİ: Oyun içi mesaj gösterme (alert() yerine)
+            function showGameMessage(text) {
+                const msg = document.createElement('div');
+                msg.style = "position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; z-index: 100; font-family: 'Cinzel', serif; text-align: center;";
+                msg.innerText = text;
+                gameContainer.appendChild(msg);
+                setTimeout(() => msg.remove(), 2500);
+            }
+
+            // GÜNCELLENDİ: killMonster -> hitMonster olarak değiştirildi ve can sistemi eklendi
+            function hitMonster(event) {
+                const monster = event.currentTarget; // Listener'ın eklendiği ana element (canavar veya boss)
+                const target = event.target; // Tıkladığımız element (gövde veya zayıf nokta)
+
+                if (monster.dataset.dying || !isGameActive) return; // Zaten ölüyorsa veya oyun aktif değilse
+                
+                let currentHealth = parseInt(monster.dataset.health);
+
+                // YENİ: Vurma efekti (direkt tıklanan hedefe)
+                target.classList.add('hit');
+                setTimeout(() => { target.classList.remove('hit'); }, 100); // 100ms sonra efekti kaldır
+
+                // YENİ: Hasar hesaplaması
+                if (monster.classList.contains('boss')) {
+                    // Bu bir boss
+                    let damage = NORMAL_DAMAGE;
+                    if (target.classList.contains('weak-spot')) {
+                        damage = WEAK_SPOT_DAMAGE; // Zayıf noktaya vuruldu
+
+                        // GÜNCELLENDİ: Sadece zayıf noktaya vurulunca yer değiştir
+                        // (Canı bu vuruştan sonra hala 0'dan büyükse)
+                        if (currentHealth - damage > 0) { 
+                            randomizeWeakSpots(monster);
+                        }
+                    }
+                    currentHealth -= damage;
+
+                } else {
+                    // Bu normal bir canavar
+                    currentHealth--;
+                }
+
+                monster.dataset.health = currentHealth; // Ana elementin canını güncelle
+
+                // YENİ: Can barını güncelle
+                const hpBarInner = monster.querySelector('.hp-bar-inner');
+                if (hpBarInner) {
+                    const maxHealth = monster.classList.contains('boss') ? BOSS_HEALTH : MONSTER_HEALTH;
+                    const healthPercent = Math.max(0, (currentHealth / maxHealth) * 100);
+                    hpBarInner.style.width = healthPercent + '%';
+                }
+
+                // Canı bittiyse öldür
+                if (currentHealth <= 0) {
+                    if (monster.classList.contains('boss')) {
+                        defeatBoss(monster);
+                    } else {
+                        killMonster(monster);
+                    }
+                }
+                
+            }
+
+            // YENİ: "Pof" efekti oluşturan fonksiyon
+            function createPuffEffect(x, y) {
+                const puff = document.createElement('div');
+                puff.classList.add('puff-effect');
+                puff.innerText = '💨'; // Veya başka bir emoji: ✨💥🎇
+                puff.style.left = `${x}px`;
+                puff.style.top = `${y}px`;
+                gameContainer.appendChild(puff);
+
+                // Animasyon bittikten sonra elementi kaldır
+                puff.addEventListener('animationend', () => {
+                    puff.remove();
+                });
+            }
+
+            // YENİ: Normal canavarları öldüren fonksiyon
+           function killMonster(monster) {
+            if (monster.dataset.dying) return;
+
+            // --- YENİ: VFX Patlamasını Tetikle ---
+            const rect = monster.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            // Normal canavar için 20 parçacık oluştur
+            for (let i = 0; i < 20; i++) {
+                particles.push(new DeathParticle(centerX, centerY));
+            }
+            // --- Bitiş ---
+
+            monster.dataset.dying = true;
+            score++;
+            updateScoreDisplay();
+            
+            monster.classList.add('dying');
+            
+            // CSS'deki yeni süreyle (0.1s) eşleşmesi için 100ms yapıyoruz
+            setTimeout(() => {
+                monster.remove();
+            }, 100);
+        }
+
+            // YENİ: Boss'u yendiğimizde
+           function defeatBoss(boss) {
+            if (boss.dataset.dying) return;
+
+            // --- YENİ: BOSS İÇİN DAHA BÜYÜK VFX PATLAMASI ---
+            const rect = boss.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            // Boss için 60 parçacık oluştur
+            for (let i = 0; i < 60; i++) {
+                particles.push(new DeathParticle(centerX, centerY));
+            }
+            // --- Bitiş ---
+
+            boss.dataset.dying = true;
+            clearTimeout(bossTimerTimeout); 
+            bossTimerContainer.classList.add('hidden');
+
+            boss.classList.add('dying');
+            score += 10; 
+            updateScoreDisplay();
+            showGameMessage("KAZANDIN!"); 
+
+            if (isGameActive) {
+                toggleGame();
+            }
+
+            // Bu süreyi de 100ms'ye düşürelim
+            setTimeout(() => {
+                boss.remove();
+            }, 100);
+        }
+
+            // YENİ: Boss'u yenemezsek (süre dolarsa)
+            function failBoss(boss) {
+                if (boss.dataset.dying) return; // Zaten yenilmiş
+                
+                // YENİ: Pof efektini boss'un pozisyonunda oluştur
+                const rect = boss.getBoundingClientRect();
+                createPuffEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+                boss.remove(); // Boss'u kaldır
+                showGameMessage("Süre Doldu!\nBoss Kaçtı.");
+                resetFromBoss();
+            }
+
+            // YENİ: Boss savaşından sonra oyunu sıfırlama
+            function resetFromBoss() {
+                isBossActive = false;
+                bossTimerContainer.classList.add('hidden');
+                // Süre çubuğu animasyonunu sıfırla
+                bossTimerBar.classList.remove('boss-timer-active');
+                bossTimerBar.style.width = '100%'; 
+
+                // Oyunu durdurmadıysak normal canavar akışına dön
+                if (isGameActive) {
+                    gameInterval = setInterval(spawnMonster, spawnRate);
+                }
+            }
+
+            // YENİ: Zayıf noktaların yerini rastgele değiştirir
+            function randomizeWeakSpots(bossElement) {
+                const spots = bossElement.querySelectorAll('.weak-spot');
+                
+                // Zayıf noktaların birbirinden çok uzaklaşmamasını veya üst üste binmemesini
+                // sağlamak için basit bir de-overlap kontrolü
+                const newPositions = [];
+                let attempts = 0;
+
+                spots.forEach(spot => {
+                    let x, y, tooClose;
+                    do {
+                        tooClose = false;
+                        // Boss'un (128px) ve zayıf noktanın (24px) boyutlarına göre rastgele konum
+                        x = Math.random() * (120) - 20; // Range: -20px to 100px
+                        y = Math.random() * (100) + 0;   // Range: 0px to 100px
+
+                        // Diğer yeni pozisyonlara çok yakın mı diye kontrol et
+                        for (const pos of newPositions) {
+                            const distance = Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2));
+                            if (distance < 30) { // 30px'den yakınsa (yaklaşık spot boyutu)
+                                tooClose = true;
+                                break;
+                            }
+                        }
+                        attempts++;
+                    } while (tooClose && attempts < 10); // 10 denemeden sonra çakışmayı kabul et
+
+                    newPositions.push({x, y});
+                    spot.style.left = x + 'px';
+                    spot.style.top = y + 'px';
+                });
+            }
+            
+            // YENİ: Boss çağırma fonksiyonu
+            function spawnBoss() {
+                isBossActive = true; // Boss durumunu aktifleştir
+                clearInterval(gameInterval); // Normal canavar akışını durdur
+
+                // Kalan tüm normal canavarları temizle
+                gameContainer.querySelectorAll('.monster:not(.boss)').forEach(m => {
+                    // YENİ: Kalan canavarlar için de pof efekti
+                    const rect = m.getBoundingClientRect();
+                    createPuffEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                    m.remove();
+                });
+
+                const boss = document.createElement('div');
+                boss.classList.add('monster', 'boss');
+                
+                // YENİ: Zayıf noktaları ve HP BAR'ı boss'un içine göm
+                boss.innerHTML = `
+                    <div class="hp-bar boss-hp-bar">
+                        <div class="hp-bar-inner" style="width: 100%;"></div>
+                    </div>
+                    🐲
+                    <div class="weak-spot" style="top: 10px; left: -20px;">🎯</div>
+                    <div class="weak-spot" style="top: 60px; left: 110px;">🎯</div>
+                `;
+
+                boss.dataset.health = BOSS_HEALTH; // Boss canı
+
+                // Boss'u ekranın ortasına yerleştir
+                const bossSize = 128; // 8rem
+                boss.style.left = (window.innerWidth / 2) - (bossSize / 2) + 'px';
+                boss.style.top = (window.innerHeight / 2) - (bossSize / 2) - 50 + 'px'; // Liderlik tablosundan biraz aşağıda
+
+                boss.addEventListener('click', hitMonster); // GÜNCELLENDİ: Listener 'hitMonster'ı çağırır
+                gameContainer.appendChild(boss);
+
+                // Süre sayacını başlat
+                bossTimerContainer.classList.remove('hidden');
+                // Animasyonu yeniden başlatmak için reflow'u zorla
+                bossTimerBar.classList.remove('boss-timer-active');
+                void bossTimerBar.offsetWidth; // Reflow
+                bossTimerBar.classList.add('boss-timer-active');
+
+                // Süre bittiğinde boss'u kaçır
+                bossTimerTimeout = setTimeout(() => {
+                    failBoss(boss);
+                }, BOSS_TIME_LIMIT);
+            }
+
+
+            // GÜNCELLENDİ: spawnMonster
+            function spawnMonster() {
+                if (!isGameActive || isBossActive) return; // Boss aktifken spawn olma
+
+                const monster = document.createElement('div');
+                monster.classList.add('monster');
+                
+                // YENİ: innerHTML olarak can barı ile birlikte ekle
+                const monsterEmoji = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
+                monster.innerHTML = `
+                    <div class="hp-bar">
+                        <div class="hp-bar-inner" style="width: 100%;"></div>
+                    </div>
+                    ${monsterEmoji}
+                `;
+                
+                // Header (yaklaşık 80px) ve footer (yaklaşık 150px) alanından kaçın
+                const spawnableHeight = window.innerHeight - 80 - 150;
+                const topOffset = 80; // Header'ın bittiği yer
+                
+                monster.style.left = Math.random() * (window.innerWidth - 60) + 'px'; // 60px ~ canavar genişliği
+                monster.style.top = (Math.random() * spawnableHeight) + topOffset + 'px';
+                
+                // YENİ: Can ekle
+                monster.dataset.health = MONSTER_HEALTH;
+
+                // GÜNCELLENDİ: Tıklama olayı
+                monster.addEventListener('click', hitMonster);
+                
+                gameContainer.appendChild(monster);
+
+                // Belirlenen süre sonunda tıklanmazsa canavarı kaldır
+                setTimeout(() => {
+                    if (monster && !monster.dataset.dying) {
+                        monster.remove();
+                    }
+                }, monsterLife);
+            }
+
+            // GÜNCELLENDİ: toggleGame
+            function toggleGame() {
+                isGameActive = !isGameActive;
+
+                if (isGameActive) {
+                    // Oyunu Başlat
+                    score = 0;
+                    updateScoreDisplay();
+                    scoreDisplay.classList.remove('hidden');
+                    gameContainer.style.pointerEvents = 'auto'; // Oyun alanına tıklanabilsin
+                    playButton.title = "Oyunu Durdur";
+                    
+                    playButton.innerHTML = '<i data-lucide="square" class="w-5 h-5 sm:w-6 sm:h-6"></i>';
+                    lucide.createIcons({
+                        nodes: [playButton.querySelector('i')]
+                    });
+                    
+                    gameInterval = setInterval(spawnMonster, spawnRate);
+                } else {
+                    // Oyunu Durdur
+                    scoreDisplay.classList.add('hidden');
+                    gameContainer.style.pointerEvents = 'none'; // Tıklamaları engelle
+                    playButton.title = "Oyunu Başlat";
+
+                    playButton.innerHTML = '<i data-lucide="gamepad-2" class="w-5 h-5 sm:w-6 sm:h-6"></i>';
+                    lucide.createIcons({
+                        nodes: [playButton.querySelector('i')]
+                    });
+
+                    clearInterval(gameInterval);
+                    gameInterval = null;
+                    
+                    // YENİ: Boss ile ilgili her şeyi temizle
+                    clearTimeout(bossTimerTimeout);
+                    if (isBossActive) {
+                        resetFromBoss();
+                    }
+                    isBossActive = false; // Oyunu durdurunca boss durumunu sıfırla
+                    
+                    // Kalan tüm canavarları temizle (ve pof efekti ekle)
+                    gameContainer.querySelectorAll('.monster').forEach(m => {
+                        const rect = m.getBoundingClientRect();
+                        createPuffEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                        m.remove();
+                    });
+                    
+                }
+            }
+
+            playButton.addEventListener('click', toggleGame);
+            // --- / GİZLİ OYUN KODU ---
+
+            setLanguage('tr'); 
+        });
     </script>
 </body>
 </html>
