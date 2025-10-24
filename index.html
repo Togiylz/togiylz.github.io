@@ -168,8 +168,8 @@
         .boss {
             font-size: 8rem; /* 128px */
             animation: spawn 0.5s ease-out, move 5s linear infinite alternate;
-            /* YENİ: Zayıf noktaların konumlanması için eklendi */
             position: relative; 
+            display: inline-block; /* EKLENDİ: Bu satır hizalama sorununu çözer */
         }
 
         /* YENİ: Zayıf nokta stilleri */
@@ -225,8 +225,7 @@
             max-width: 120px;
             height: 12px;
             border-width: 2px;
-            /* YENİ: Can barını 15 piksel sola kaydırarak hizalıyoruz */
-            transform: translateX(calc(-50% - 15px));
+            /* Transform kuralı silindi, artık otomatik ortalanacak */
         }
         .boss .hp-bar-inner {
             background-color: #f87171; /* Boss canı kırmızı */
@@ -361,7 +360,7 @@
                     </svg>
                     
                     <div class="project-image-container rounded-sm overflow-hidden border border-[#c9b79c] shadow-md mb-4">
-                        <img src="https://via.placeholder.com/320x180/3d2b1f/f0e6d2?text=Sand+Blast" 
+                        <img src="SandBlast.png"
                              alt="Sand Blast Proje Resmi" 
                              class="project-image w-full h-auto object-cover block"
                              onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
@@ -933,7 +932,7 @@
             boss.classList.add('dying');
             score += 10; 
             updateScoreDisplay();
-            showGameMessage("KAZANDIN!"); 
+            showGameMessage("YOU WIN!"); 
 
             if (isGameActive) {
                 toggleGame();
