@@ -13,10 +13,9 @@
     <style>
         body {
             font-family: 'Lora', serif;
-            color: #d1c7b8; /* Eskitilmiş kağıt rengi */
-            background-color: #1a110f; /* Koyu ahşap/deri rengi */
+            color: #d1c7b8;
+            background-color: #1a110f;
             overflow-x: hidden;
-            /* Özel, Küçültülmüş SVG Kılıç İmleci */
             cursor: url(data:image/png;base64,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) 0 0, auto;
         }
 
@@ -38,17 +37,16 @@
             pointer-events: none;
         }
 
-        /* Dil Butonları İçin Gerekli Olan ve @apply KULLANMAYAN CSS */
         .lang-btn {
-            color: #94a3b8; /* text-slate-400 */
+            color: #94a3b8; 
             transition: color 0.2s;
         }
         .lang-btn:hover {
-            color: #fcd34d; /* hover:text-amber-300 */
+            color: #fcd34d; 
         }
         .lang-btn.active {
-            color: #fcd34d; /* text-amber-300 */
-            font-weight: 600; /* font-semibold */
+            color: #fcd34d; 
+            font-weight: 600; 
         }
         
         .reveal {
@@ -65,7 +63,6 @@
             background-image: none;
         }
 
-        /* Projeler Bölümü Stilleri */
         .projects-container {
             display: flex;
             gap: 2.5rem;
@@ -129,10 +126,9 @@
             box-shadow: inset 2px 2px 5px rgba(0,0,0,0.15);
         }
 
-        /* --- YENİ OYUN STİLLERİ --- */
         .monster {
             position: absolute;
-            font-size: 3rem; /* 48px */
+            font-size: 3rem; 
             cursor: inherit;
             user-select: none;
             filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.7));
@@ -141,12 +137,11 @@
         }
 
         .monster.dying {
-    animation: none; /* Hareketi durdur */
-    transform: scale(0.8); /* Hafifçe küçülsün */
-    opacity: 0;
-    /* Geçişi çok daha hızlı yapıyoruz */
-    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-}
+            animation: none; 
+            transform: scale(0.8); 
+            opacity: 0;
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+        }
 
         @keyframes spawn {
             from { transform: scale(0.1); opacity: 0; }
@@ -158,29 +153,25 @@
             to { transform: translate(30px, 15px); }
         }
 
-        /* YENİ: Canavara vurma efekti */
         .monster.hit {
             transform: scale(1.1);
             filter: brightness(1.5);
             transition: all 0.05s;
         }
 
-        /* YENİ: Boss stilleri */
         .boss {
-            font-size: 8rem; /* 128px */
+            font-size: 8rem; 
             animation: spawn 0.5s ease-out, move 5s linear infinite alternate;
             position: relative; 
-            display: inline-block; /* EKLENDİ: Bu satır hizalama sorununu çözer */
+            display: inline-block; 
         }
 
-        /* YENİ: Zayıf nokta stilleri */
         .weak-spot {
             position: absolute;
-            font-size: 1.5rem; /* 24px */
+            font-size: 1.5rem; 
             cursor: inherit;
             filter: drop-shadow(0 0 8px yellow);
             animation: pulse 1s infinite;
-            /* Vuruşların gövdeye değil, zayıf noktaya gitmesini sağlar */
             pointer-events: auto; 
         }
 
@@ -189,7 +180,6 @@
             50% { transform: scale(1.2); }
         }
 
-        /* YENİ: Boss süre sayacı animasyonu */
         .boss-timer-active {
             animation: deplete-timer 10s linear forwards;
         }
@@ -198,16 +188,15 @@
             to { width: 0%; }
         }
 
-        /* YENİ: Can Barı Stilleri */
         .hp-bar {
             position: absolute;
-            top: -12px; /* Emoji'nin biraz üstü */
+            top: -12px; 
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            max-width: 40px; /* Çok büyümesin */
+            max-width: 40px; 
             height: 6px;
-            background-color: #3f3f46; /* Koyu arkaplan */
+            background-color: #3f3f46; 
             border: 1px solid #18181b;
             border-radius: 3px;
             overflow: hidden;
@@ -215,31 +204,28 @@
         }
         .hp-bar-inner {
             height: 100%;
-            background-color: #4ade80; /* Yeşil can */
+            background-color: #4ade80; 
             transition: width 0.1s linear;
         }
 
-        /* Boss can barı konumu ve boyutu */
         .boss .hp-bar {
             top: -15px; 
             width: 100%;
             max-width: 120px;
             height: 12px;
             border-width: 2px;
-            /* Transform kuralı silindi, artık otomatik ortalanacak */
         }
         .boss .hp-bar-inner {
-            background-color: #f87171; /* Boss canı kırmızı */
+            background-color: #f87171; 
         }
 
-        /* --- YENİ: "POF" EFEKTİ STİLLERİ --- */
         .puff-effect {
             position: absolute;
-            font-size: 2rem; /* Boyutunu ayarlayın */
+            font-size: 2rem; 
             opacity: 0;
             transform: scale(0.5);
             animation: puff-explode 0.4s ease-out forwards;
-            pointer-events: none; /* Tıklamayı engelle */
+            pointer-events: none; 
             z-index: 100;
         }
 
@@ -248,7 +234,6 @@
             50% { opacity: 0.8; transform: scale(1.5); filter: hue-rotate(90deg); }
             100% { opacity: 0; transform: scale(2); filter: hue-rotate(180deg); }
         }
-        /* --- / YENİ OYUN STİLLERİ --- */
 
     </style>
 </head>
@@ -270,23 +255,53 @@
                     <i data-lucide="gamepad-2" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                 </button>
                 <span id="score-display" class="hidden text-white font-cinzel text-base sm:text-lg">Skor: 0</span>
-                </div>
+            </div>
 
             <div class="hidden md:flex items-center">
-                <div class="flex space-x-6 text-lg"><a href="#about" class="hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a><a href="#skills" class="hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a><a href="#experience" class="hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a><a href="#projects" class="hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a><a href="#contact" class="hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a></div>
-                <div class="ml-8 flex items-center space-x-2 border-l border-amber-800/50 pl-6 text-sm"><button id="lang-tr" class="lang-btn active">TR</button><span class="text-slate-500">/</span><button id="lang-en" class="lang-btn">EN</button></div>
+                <div class="flex space-x-6 text-lg">
+                    <a href="#about" class="hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a>
+                    <a href="#skills" class="hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a>
+                    <a href="#experience" class="hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a>
+                    <a href="#projects" class="hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a>
+                    <a href="#contact" class="hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a>
+                </div>
+                <div class="ml-8 flex items-center space-x-2 border-l border-amber-800/50 pl-6 text-sm">
+                    <button id="lang-tr" class="lang-btn active">TR</button>
+                    <span class="text-slate-500">/</span>
+                    <button id="lang-en" class="lang-btn">EN</button>
+                </div>
             </div>
             <div class="flex items-center md:hidden">
-                <div class="flex items-center space-x-2 mr-4"><button id="lang-tr-mobile" class="lang-btn active text-sm">TR</button><span class="text-slate-500">/</span><button id="lang-en-mobile" class="lang-btn text-sm">EN</button></div>
+                <div class="flex items-center space-x-2 mr-4">
+                    <button id="lang-tr-mobile" class="lang-btn active text-sm">TR</button>
+                    <span class="text-slate-500">/</span>
+                    <button id="lang-en-mobile" class="lang-btn text-sm">EN</button>
+                </div>
                 <button id="mobile-menu-button" class="text-white"><i data-lucide="menu"></i></button>
             </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2"><a href="#about" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a><a href="#skills" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a><a href="#experience" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a><a href="#projects" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a><a href="#contact" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a></div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#about" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_about"></a>
+            <a href="#skills" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_skills"></a>
+            <a href="#experience" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_experience"></a>
+            <a href="#projects" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_projects"></a>
+            <a href="#contact" class="block hover:text-amber-300 transition-colors" data-lang-key="nav_contact"></a>
+        </div>
         
-        <div class="absolute bottom-0 left-0 w-full text-amber-700" style="line-height: 0;">
-            <svg width="100%" height="20" viewBox="0 0 1200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 10 L20 10 C30 2, 40 18, 50 10 L550 10 C565 10, 575 0, 600 0 C625 0, 635 10, 650 10 L1150 10 C1160 18, 1170 2, 1180 10 L1200 10" stroke="currentColor" stroke-width="1.5" fill="none"></path>
-                <path d="M600 0 L600 4" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+        <!-- YENİ FANTASTİK TASARIMLI AYIRICI ÇİZGİ -->
+        <div class="absolute bottom-0 left-0 w-full flex items-center justify-center translate-y-1/2 z-50">
+            <!-- Tam birleşik, kesintisiz arka plan çizgisi -->
+            <div class="absolute w-full h-[1.5px] bg-gradient-to-r from-transparent via-amber-600/80 to-transparent"></div>
+            
+            <!-- Daha küçük ve zarif Kristal/Göz SVG'si -->
+            <svg class="relative z-10 w-36 h-auto text-amber-500 drop-shadow-[0_0_6px_rgba(245,158,11,0.6)]" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Arka plan çizgisini kapatan ve göz şeklini oluşturan dış hat -->
+                <path d="M30 20 C 38 20, 42 10, 50 10 C 58 10, 62 20, 70 20 C 62 20, 58 30, 50 30 C 42 30, 38 20, 30 20 Z" fill="#1a110f" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <!-- Merkezdeki Parlayan Kristal -->
+                <polygon points="50,13 54,20 50,27 46,20" fill="currentColor"/>
+                <!-- Yanlardaki Ufak Süs Elmasları -->
+                <polygon points="23,18.5 25,20 23,21.5 21,20" fill="currentColor"/>
+                <polygon points="77,18.5 79,20 77,21.5 75,20" fill="currentColor"/>
             </svg>
         </div>
     </header>
@@ -324,8 +339,38 @@
         <section id="experience" class="py-20 reveal">
             <h2 class="text-4xl font-bold text-amber-300 mb-12 text-center font-cinzel tracking-widest" data-lang-key="experience_title"></h2>
             <div class="max-w-4xl mx-auto relative border-l-2 border-amber-800/30 pl-10">
-                <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/70" data-lang-key="exp1_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp1_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp1_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp1_desc1"></li><li data-lang-key="exp1_desc2"></li></ul></div>
-                <div class="mb-12 reveal pl-4"><p class="text-sm text-amber-200/70" data-lang-key="exp2_date"></p><h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp2_title"></h3><p class="text-slate-400 font-medium" data-lang-key="exp2_company"></p><ul class="list-disc list-inside mt-2 text-slate-300"><li data-lang-key="exp2_desc1"></li><li data-lang-key="exp2_desc2"></li><li data-lang-key="exp2_desc3"></li></ul></div>
+                
+                <div class="mb-12 reveal pl-4">
+                    <p class="text-sm text-amber-200/70" data-lang-key="exp0_date"></p>
+                    <h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp0_title"></h3>
+                    <p class="text-slate-400 font-medium" data-lang-key="exp0_company"></p>
+                    <ul class="list-disc list-inside mt-2 text-slate-300">
+                        <li data-lang-key="exp0_desc1"></li>
+                        <li data-lang-key="exp0_desc2"></li>
+                        <li data-lang-key="exp0_desc3"></li>
+                    </ul>
+                </div>
+
+                <div class="mb-12 reveal pl-4">
+                    <p class="text-sm text-amber-200/70" data-lang-key="exp1_date"></p>
+                    <h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp1_title"></h3>
+                    <p class="text-slate-400 font-medium" data-lang-key="exp1_company"></p>
+                    <ul class="list-disc list-inside mt-2 text-slate-300">
+                        <li data-lang-key="exp1_desc1"></li>
+                        <li data-lang-key="exp1_desc2"></li>
+                    </ul>
+                </div>
+                
+                <div class="mb-12 reveal pl-4">
+                    <p class="text-sm text-amber-200/70" data-lang-key="exp2_date"></p>
+                    <h3 class="text-xl font-bold text-white mt-1 font-cinzel" data-lang-key="exp2_title"></h3>
+                    <p class="text-slate-400 font-medium" data-lang-key="exp2_company"></p>
+                    <ul class="list-disc list-inside mt-2 text-slate-300">
+                        <li data-lang-key="exp2_desc1"></li>
+                        <li data-lang-key="exp2_desc2"></li>
+                        <li data-lang-key="exp2_desc3"></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -333,6 +378,53 @@
             <h2 class="text-4xl font-bold text-amber-300 mb-12 text-center font-cinzel tracking-widest" data-lang-key="projects_title"></h2>
             <div class="projects-container">
                 
+                <!-- YENİ EKLENEN WATT'S THE LIMIT PROJESİ -->
+                <div class="project-card reveal">
+                    <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+                                <feOffset dx="2" dy="2" in="blur" result="shadow"/>
+                                <feFlood flood-color="#fff" flood-opacity="0.2" result="lightColor"/>
+                                <feComposite in="lightColor" in2="SourceAlpha" operator="in" result="light"/>
+                                <feOffset dx="-1.5" dy="-1.5" in="blur" result="highlight"/>
+                                <feFlood flood-color="#000" flood-opacity="0.3" result="darkColor"/>
+                                <feComposite in="darkColor" in2="SourceAlpha" operator="in" result="dark"/>
+                                <feMerge>
+                                    <feMergeNode in="shadow"/>
+                                    <feMergeNode in="light"/>
+                                    <feMergeNode in="dark"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path class="blade" d="M 44 85 L 56 85 L 56 105 L 44 105 Z"/>
+                        <rect class="guard" x="30" y="105" width="40" height="8" rx="2"/>
+                        <path class="handle" d="M 45 113 L 55 113 L 55 180 L 45 180 Z"/>
+                        <circle class="pommel" cx="50" cy="180" r="7"/>
+                        <circle class="rivet" cx="50" cy="130" r="2"/>
+                        <circle class="rivet" cx="50" cy="155" r="2"/>
+                    </svg>
+                    
+                    <div class="project-image-container rounded-sm overflow-hidden border border-[#c9b79c] shadow-md mb-4" style="aspect-ratio:16/9;">
+                        <!-- Steam'den Doğrudan Çekilen Kapak Fotoğrafı -->
+                        <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4187000/header.jpg"
+                             alt="Watt's the Limit Proje Resmi" 
+                             class="project-image w-full h-full object-cover block"
+                             onerror="this.src='https://placehold.co/320x180/3d2b1f/f0e6d2?text=G%C3%B6rsel+Bulunamad%C4%B1';">
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-2 font-cinzel" data-lang-key="proj_watt_title"></h3>
+                    <p class="mb-4 text-sm" data-lang-key="proj_watt_desc"></p>
+                    <ul class="list-disc list-inside mb-4 text-sm">
+                        <li data-lang-key="proj_watt_feat1"></li>
+                        <li data-lang-key="proj_watt_feat2"></li>
+                    </ul>
+                    <a href="https://store.steampowered.com/app/4187000/Watts_the_Limit/" target="_blank" class="inline-flex items-center text-amber-800 hover:text-amber-900 font-bold">
+                        <span data-lang-key="proj_watt_link"></span> <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                    </a>
+                </div>
+
                 <div class="project-card reveal">
                     <svg class="dagger-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -542,14 +634,13 @@
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.x;
             mouse.y = e.y;
-            if (particles.length < 200) { // Toplam parçacık limiti
+            if (particles.length < 200) { 
                  for (let i = 0; i < 3; i++) {  
                      particles.push(new Spark(mouse.x, mouse.y));
                  }
             }
         });
 
-        // Kıvılcım Sınıfı (Mouse takip eden)
         class Spark {
             constructor(x, y) {
                 this.x = x;
@@ -576,40 +667,36 @@
                 ctx.stroke();
             }
         }
-// YENİ: Patlama Parçacığı Sınıfı
+
         class DeathParticle {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                // Sağa, sola, yukarı, aşağı rastgele bir hızla saçılır
                 this.speedX = Math.random() * 12 - 6;
                 this.speedY = Math.random() * 12 - 6;
-                this.size = Math.random() * 4 + 2; // Parçacık boyutu
-                this.life = 1; // Yaşam süresi (1 = %100)
-                this.lifeReduction = Math.random() * 0.02 + 0.02; // Ne kadar hızlı kaybolacağı
-                this.gravity = 0.1; // Yer çekimi
-                // Kırmızı-Turuncu-Sarı tonlarında rastgele bir renk
+                this.size = Math.random() * 4 + 2; 
+                this.life = 1; 
+                this.lifeReduction = Math.random() * 0.02 + 0.02; 
+                this.gravity = 0.1; 
                 this.color = 'hsl(' + (Math.random() * 60) + ', 100%, 55%)';
             }
             update() {
-                this.speedY += this.gravity; // Yer çekimi uygula
+                this.speedY += this.gravity; 
                 this.x += this.speedX;
                 this.y += this.speedY;
-                this.life -= this.lifeReduction; // Yaşam süresini azalt
+                this.life -= this.lifeReduction; 
             }
             draw() {
                 ctx.beginPath();
-                // HATA DÜZELTMESİ: Yarıçapın asla negatif olmamasını sağlıyoruz.
                 const radius = Math.max(0, this.size * this.life);
                 ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                // Saydamlığın da 0'ın altına düşmediğinden emin olalım.
                 ctx.globalAlpha = Math.max(0, this.life);
                 ctx.fill();
-                ctx.globalAlpha = 1; // Diğer çizimler için alfasayı sıfırla
+                ctx.globalAlpha = 1; 
             }
         }
-        // Alev Sınıfı (Alttan yükselen)
+
         class FlameParticle {
             constructor(x, y) {
                 this.x = x;
@@ -627,9 +714,9 @@
             }
             update() {
                 this.sway += this.swaySpeed;
-                this.x += Math.sin(this.sway); // Alev salınımı
+                this.x += Math.sin(this.sway); 
                 this.y += this.speedY;
-                this.speedY += 0.02; // Hafif yavaşlama/yükselme
+                this.speedY += 0.02; 
                 
                 if (this.size > 0.2) {
                     this.size -= (this.baseSize / 50);  
@@ -666,7 +753,6 @@
             
             ctx.globalCompositeOperation = 'lighter';
 
-            // Sürekli yükselen alevleri ekle
             if (particles.length < 200 && Math.random() > 0.85) {  
                 const x = Math.random() * canvas.width;
                 particles.push(new FlameParticle(x, canvas.height + 20));  
@@ -678,7 +764,6 @@
         animateParticles();
 
 
-        // --- Diğer Scriptler ---
         lucide.createIcons();
         const translations = {
             en: {
@@ -694,21 +779,37 @@
                 skills_cat4_title: "Graphics & UI/UX Tools", skills_cat4_list1: "Figma, Adobe Photoshop (basic)", skills_cat4_list2: "Blender (basic), Spine (2D animation)",
                 skills_cat5_title: "Core Knowledge & Techniques", skills_cat5_list1: "Object-Oriented Programming (OOP)", skills_cat5_list2: "Data Structures & Mobile Game Optimization", skills_cat5_list3: "Real-time Multiplayer Logic", skills_cat5_list4: "VR/AR Development, Level Design",
                 skills_cat6_title: "Languages", skills_cat6_list1: "Turkish (Native)", skills_cat6_list2: "English (Fluent, C1)",
+                
                 experience_title: "Experience",
+                exp0_date: "2025 - Present", exp0_title: "Founder & Indie Game Developer", exp0_company: "Tobo Games", 
+                exp0_desc1: "Co-founded a studio and developed 'Watt's the Limit?' within a 2-person team.", 
+                exp0_desc2: "Owned gameplay architecture, system logic, balancing, and optimization.",
+                exp0_desc3: "Achieved 7,000+ demo activations and 40 min median playtime, utilizing player data for iteration.",
                 exp1_date: "Summer 2025", exp1_title: "Game Developer Intern", exp1_company: "UDO, Ankara, Turkey", 
                 exp1_desc1: "During my internship, I took on the Game Developer role, actively participating in developing the game's core infrastructure and implementing its main mechanics.", 
                 exp1_desc2: "This process provided a significant opportunity for technical growth and gave me hands-on experience in an agile team environment.",
-                exp2_date: "Jul 2025 - Sep 2025", exp2_title: "Game Developer Intern", exp2_company: "Craftian Makes, Istanbul, Turkey", exp2_desc1: "Developed 'Throw Master (Demo)', a VR action game for Meta Quest.", exp2_desc2: "Focused on precise controller tracking and immersive environments.", exp2_desc3: "Enhanced user immersion through refined haptic feedback and realistic physics-based object responses.",
+                exp2_date: "Jul 2025 - Sep 2025", exp2_title: "Game Developer Intern", exp2_company: "Craftian Makes, Istanbul, Turkey", 
+                exp2_desc1: "Developed 'Throw Master (Demo)', a VR action game for Meta Quest.", 
+                exp2_desc2: "Focused on precise controller tracking and immersive environments.", 
+                exp2_desc3: "Enhanced user immersion through refined haptic feedback and realistic physics-based object responses.",
+                
                 projects_title: "Projects",
+                proj_watt_title: "Watt's the Limit? - PC/Steam Game", 
+                proj_watt_desc: "Co-founded an indie studio and developed this game in a 2-person team. I was the primary developer, taking full ownership of all gameplay programming, systems architecture, and optimization.", 
+                proj_watt_feat1: "Designed and coded the core loop, progression systems, upgrade economy, and gameplay interactions from scratch.", 
+                proj_watt_feat2: "Achieved successful metrics with 7,000+ demo activations, 6,000+ unique players, and a 40 min median playtime.", 
+                proj_watt_link: "View on Steam",
                 proj1_title: "Sand Blast - Mobile Game", proj1_desc: "A Unity game with a real-time global leaderboard (Firebase) and AdMob monetization.", proj1_feat1: "Realistic sand physics and optimized particle effects.", proj1_feat2: "Object pooling technique implemented for smooth mobile performance.", proj1_link: "View on Google Play",
                 proj2_title: "Block Collapse - Puzzle Game", proj2_desc: "A puzzle game with dynamic grid management, intelligent deadlock resolution, and optimized performance.", proj2_feat1: "A flexible system supporting 2-10 rows, 2-12 columns, and 1-6 color variations.", proj2_link: "Play on itch.io",
                 proj3_title: "Throw Master (Demo) - VR Game", proj3_desc: "A physics-based VR action game developed for Meta Quest.", proj3_feat1: "Precise controller tracking and realistic physics interactions.", proj3_feat2: "Immersive environments and haptic feedback.", proj3_link: "View on Meta Store",
                 proj4_title: "GameJam & UI/UX", proj4_desc: "Experiences in rapid prototyping and team-based game design.", proj4_feat1: "<strong>Goatlam 2024:</strong> Game development in 48 hours with a 3-person team.", proj4_feat2: "<strong>Chainly (Figma):</strong> Prototyped a user-friendly interface for logistics management.",
+                
                 education_title: "Education",
                 edu1_uni: "Üsküdar University", edu1_degree: "B.Sc., Software Engineering (Expected Graduation: 2027)", edu1_loc: "Istanbul, Turkey",
                 edu2_school: "TED Konya College", edu2_field: "Mathematics & Science (2018 - 2022)", edu2_loc: "Konya, Turkey",
+                
                 contact_title: "Get in Touch", contact_desc: "Feel free to contact me for new opportunities, collaborations, or just to say hello.", contact_button: "Send Email",
-                contact_helper_text: "(You can click the address to open your mail app, or copy it)", // BU SATIRI EKLE
+                contact_helper_text: "(You can click the address to open your mail app, or copy it)", 
                 footer_text: "© 2025 Tolga Yıldız. All rights reserved.",
             },
             tr: {
@@ -724,21 +825,37 @@
                 skills_cat4_title: "Grafik & UI/UX Araçları", skills_cat4_list1: "Figma, Adobe Photoshop (temel)", skills_cat4_list2: "Blender (temel), Spine (2D animasyon)",
                 skills_cat5_title: "Temel Bilgiler & Teknikler", skills_cat5_list1: "Object-Oriented Programming (OOP)", skills_cat5_list2: "Veri Yapıları & Mobil Oyun Optimizasyonu", skills_cat5_list3: "Gerçek Zamanlı Çok Oyunculu Mantık", skills_cat5_list4: "VR/AR Geliştirme, Seviye Tasarımı",
                 skills_cat6_title: "Diller", skills_cat6_list1: "Türkçe (Anadil)", skills_cat6_list2: "İngilizce (Akıcı, C1)",
+                
                 experience_title: "Deneyim",
+                exp0_date: "2025 - Günümüz", exp0_title: "Kurucu & Bağımsız Oyun Geliştirici", exp0_company: "Tobo Games", 
+                exp0_desc1: "Bir stüdyo kurdum ve 2 kişilik bir ekiple 'Watt's the Limit?' oyununu geliştirdim.", 
+                exp0_desc2: "Oynanış mimarisi, sistem mantığı, dengeleme ve optimizasyon süreçlerini tamamen üstlendim.",
+                exp0_desc3: "7.000'den fazla demo aktivasyonu ve 40 dakikalık medyan oynama süresine ulaştık; geliştirmeler için oyuncu verilerini analiz ettim.",
                 exp1_date: "Yaz 2025", exp1_title: "Oyun Geliştirici Stajyeri", exp1_company: "UDO, Ankara, Türkiye", 
                 exp1_desc1: "Stajım süresince Game Developer rolüyle, oyunun temel altyapısını geliştirmede ve ana mekaniklerin hayata geçirilmesinde aktif görev aldım.", 
                 exp1_desc2: "Bu süreç bana hem teknik anlamda önemli bir gelişim kaydetme hem de çevik bir ekip içinde çalışma pratiği kazanma fırsatı sundu.",
-                exp2_date: "Tem 2025 - Eyl 2025", exp2_title: "Oyun Geliştirici Stajyeri", exp2_company: "Craftian Makes, İstanbul, Türkiye", exp2_desc1: "Meta Quest için \"Throw Master (Demo)\" adlı VR aksiyon oyununu geliştirdim.", exp2_desc2: "Hassas kontrolcü takibi ve sürükleyici ortamlar üzerinde çalıştım.", exp2_desc3: "Gelişmiş haptik geri bildirim ve gerçekçi fizik tabanlı nesne tepkileri ile kullanıcı deneyimini iyileştirdim.",
+                exp2_date: "Tem 2025 - Eyl 2025", exp2_title: "Oyun Geliştirici Stajyeri", exp2_company: "Craftian Makes, İstanbul, Türkiye", 
+                exp2_desc1: "Meta Quest için \"Throw Master (Demo)\" adlı VR aksiyon oyununu geliştirdim.", 
+                exp2_desc2: "Hassas kontrolcü takibi ve sürükleyici ortamlar üzerinde çalıştım.", 
+                exp2_desc3: "Gelişmiş haptik geri bildirim ve gerçekçi fizik tabanlı nesne tepkileri ile kullanıcı deneyimini iyileştirdim.",
+                
                 projects_title: "Projeler",
+                proj_watt_title: "Watt's the Limit? - PC/Steam Oyunu", 
+                proj_watt_desc: "İki kişilik bir ekiple geliştirdiğimiz bu bağımsız oyunun tüm programlama, sistem mimarisi ve optimizasyon süreçlerini tamamen ben üstlendim.", 
+                proj_watt_feat1: "Temel oyun döngüsünü (core loop), ilerleme sistemlerini, yükseltme ekonomisini ve oynanış mekaniklerinin tüm kodlamasını baştan sona gerçekleştirdim.", 
+                proj_watt_feat2: "Steam Demo sürecinde 7.000'den fazla aktivasyon, 6.000+ tekil oyuncu ve 40 dakikalık medyan oynama süresi ile çok başarılı bir etkileşim sağlandı.", 
+                proj_watt_link: "Steam'de İncele",
                 proj1_title: "Sand Blast - Mobil Oyun", proj1_desc: "Gerçek zamanlı global lider tablosu (Firebase) ve AdMob para kazanma özelliklerine sahip bir Unity oyunudur.", proj1_feat1: "Gerçekçi kum fiziği ve optimize edilmiş parçacık efektleri.", proj1_feat2: "Akıcı mobil performans için object pooling tekniği uygulandı.", proj1_link: "Google Play'de Gör",
                 proj2_title: "Block Collapse - Puzzle Oyunu", proj2_desc: "Dinamik grid yönetimi, akıllı kilitlenme çözümü ve optimize edilmiş performansa sahip bir bulmaca oyunudur.", proj2_feat1: "2-10 satır, 2-12 sütun ve 1-6 renk varyasyonunu destekleyen esnek bir sistem.", proj2_link: "itch.io'da Oyna",
                 proj3_title: "Throw Master (Demo) - VR Oyunu", proj3_desc: "Meta Quest için geliştirilmiş, fizik tabanlı bir VR aksiyon oyunudur.", proj3_feat1: "Hassas kontrolcü takibi ve gerçekçi fizik etkileşimleri.", proj3_feat2: "Kullanıcıyı içine çeken ortamlar ve haptik geri bildirimler.", proj3_link: "Meta Store'da Gör",
                 proj4_title: "GameJam & UI/UX", proj4_desc: "Hızlı prototipleme ve takım tabanlı oyun tasarımı deneyimleri.", proj4_feat1: "<strong>Goatlam 2024:</strong> 48 saat içinde 3 kişilik bir ekiple oyun geliştirme.", proj4_feat2: "<strong>Chainly (Figma):</strong> Lojistik yönetimi için kullanıcı dostu bir arayüz prototipi.",
+                
                 education_title: "Eğitim",
                 edu1_uni: "Üsküdar Üniversitesi", edu1_degree: "Lisans, Yazılım Mühendisliği (Beklenen Mezuniyet: 2027)", edu1_loc: "İstanbul, Türkiye",
                 edu2_school: "TED Konya Koleji", edu2_field: "Matematik & Fen (2018 - 2022)", edu2_loc: "Konya, Türkiye",
+                
                 contact_title: "İletişime Geçin", contact_desc: "Yeni fırsatlar, işbirlikleri veya sadece bir merhaba demek için benimle iletişime geçmekten çekinmeyin.", contact_button: "E-posta Gönder",
-                contact_helper_text: "(Adrese tıklayarak mail uygulamasını açabilir veya kopyalayabilirsiniz)", // BU SATIRI EKLE
+                contact_helper_text: "(Adrese tıklayarak mail uygulamasını açabilir veya kopyalayabilirsiniz)", 
                 footer_text: "© 2025 Tolga Yıldız. Tüm hakları saklıdır.",
             }
         };
@@ -776,44 +893,37 @@
 
         document.addEventListener('DOMContentLoaded', () => { 
             
-            // --- YENİ: GİZLİ OYUN KODU ---
             const playButton = document.getElementById('play-game-btn');
             const scoreDisplay = document.getElementById('score-display');
             const gameContainer = document.getElementById('game-container');
-            // YENİ: Boss sayacı elementleri
             const bossTimerContainer = document.getElementById('boss-timer');
             const bossTimerBar = document.getElementById('boss-timer-bar');
 
             let isGameActive = false;
             let score = 0;
             let gameInterval = null;
-            // YENİ: Boss durumu ve sayaç
             let isBossActive = false;
             let bossTimerTimeout = null;
 
-            // YENİ: Oyun sabitleri
-            const BOSS_SCORE_THRESHOLD = 10; // 10 skorda boss çıkar
-            const BOSS_HEALTH = 100; // Boss canı 100
-            const BOSS_TIME_LIMIT = 10000; // 10 saniye
+            const BOSS_SCORE_THRESHOLD = 10; 
+            const BOSS_HEALTH = 100; 
+            const BOSS_TIME_LIMIT = 10000; 
             const MONSTER_HEALTH = 3;
-            const NORMAL_DAMAGE = 1; // Normal vuruş hasarı
-            const WEAK_SPOT_DAMAGE = 5; // Zayıf nokta hasarı
+            const NORMAL_DAMAGE = 1; 
+            const WEAK_SPOT_DAMAGE = 5; 
 
-            // Kullanıcının istediği mistik canavarlar (ve biraz daha fazlası)
             const monsterTypes = ['👹', '🐉', '🧛', '👺', '👻', '👽', '💀', '🎃']; 
-            const spawnRate = 1200; // ms cinsinden spawn olma sıklığı
-            const monsterLife = 2500; // ms cinsinden canavarın ekranda kalma süresi
+            const spawnRate = 1200; 
+            const monsterLife = 2500; 
 
             function updateScoreDisplay() {
                 scoreDisplay.innerText = `Skor: ${score}`;
 
-                // YENİ: Boss çağırma kontrolü
                 if (score >= BOSS_SCORE_THRESHOLD && !isBossActive && isGameActive) {
                     spawnBoss();
                 }
             }
 
-            // YENİ: Oyun içi mesaj gösterme (alert() yerine)
             function showGameMessage(text) {
                 const msg = document.createElement('div');
                 msg.style = "position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; color: white; background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; z-index: 100; font-family: 'Cinzel', serif; text-align: center;";
@@ -822,28 +932,22 @@
                 setTimeout(() => msg.remove(), 2500);
             }
 
-            // GÜNCELLENDİ: killMonster -> hitMonster olarak değiştirildi ve can sistemi eklendi
             function hitMonster(event) {
-                const monster = event.currentTarget; // Listener'ın eklendiği ana element (canavar veya boss)
-                const target = event.target; // Tıkladığımız element (gövde veya zayıf nokta)
+                const monster = event.currentTarget; 
+                const target = event.target; 
 
-                if (monster.dataset.dying || !isGameActive) return; // Zaten ölüyorsa veya oyun aktif değilse
+                if (monster.dataset.dying || !isGameActive) return; 
                 
                 let currentHealth = parseInt(monster.dataset.health);
 
-                // YENİ: Vurma efekti (direkt tıklanan hedefe)
                 target.classList.add('hit');
-                setTimeout(() => { target.classList.remove('hit'); }, 100); // 100ms sonra efekti kaldır
+                setTimeout(() => { target.classList.remove('hit'); }, 100); 
 
-                // YENİ: Hasar hesaplaması
                 if (monster.classList.contains('boss')) {
-                    // Bu bir boss
                     let damage = NORMAL_DAMAGE;
                     if (target.classList.contains('weak-spot')) {
-                        damage = WEAK_SPOT_DAMAGE; // Zayıf noktaya vuruldu
+                        damage = WEAK_SPOT_DAMAGE; 
 
-                        // GÜNCELLENDİ: Sadece zayıf noktaya vurulunca yer değiştir
-                        // (Canı bu vuruştan sonra hala 0'dan büyükse)
                         if (currentHealth - damage > 0) { 
                             randomizeWeakSpots(monster);
                         }
@@ -851,13 +955,11 @@
                     currentHealth -= damage;
 
                 } else {
-                    // Bu normal bir canavar
                     currentHealth--;
                 }
 
-                monster.dataset.health = currentHealth; // Ana elementin canını güncelle
+                monster.dataset.health = currentHealth; 
 
-                // YENİ: Can barını güncelle
                 const hpBarInner = monster.querySelector('.hp-bar-inner');
                 if (hpBarInner) {
                     const maxHealth = monster.classList.contains('boss') ? BOSS_HEALTH : MONSTER_HEALTH;
@@ -865,7 +967,6 @@
                     hpBarInner.style.width = healthPercent + '%';
                 }
 
-                // Canı bittiyse öldür
                 if (currentHealth <= 0) {
                     if (monster.classList.contains('boss')) {
                         defeatBoss(monster);
@@ -876,34 +977,28 @@
                 
             }
 
-            // YENİ: "Pof" efekti oluşturan fonksiyon
             function createPuffEffect(x, y) {
                 const puff = document.createElement('div');
                 puff.classList.add('puff-effect');
-                puff.innerText = '💨'; // Veya başka bir emoji: ✨💥🎇
+                puff.innerText = '💨'; 
                 puff.style.left = `${x}px`;
                 puff.style.top = `${y}px`;
                 gameContainer.appendChild(puff);
 
-                // Animasyon bittikten sonra elementi kaldır
                 puff.addEventListener('animationend', () => {
                     puff.remove();
                 });
             }
 
-            // YENİ: Normal canavarları öldüren fonksiyon
            function killMonster(monster) {
             if (monster.dataset.dying) return;
 
-            // --- YENİ: VFX Patlamasını Tetikle ---
             const rect = monster.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            // Normal canavar için 20 parçacık oluştur
             for (let i = 0; i < 20; i++) {
                 particles.push(new DeathParticle(centerX, centerY));
             }
-            // --- Bitiş ---
 
             monster.dataset.dying = true;
             score++;
@@ -911,25 +1006,20 @@
             
             monster.classList.add('dying');
             
-            // CSS'deki yeni süreyle (0.1s) eşleşmesi için 100ms yapıyoruz
             setTimeout(() => {
                 monster.remove();
             }, 100);
         }
 
-            // YENİ: Boss'u yendiğimizde
            function defeatBoss(boss) {
             if (boss.dataset.dying) return;
 
-            // --- YENİ: BOSS İÇİN DAHA BÜYÜK VFX PATLAMASI ---
             const rect = boss.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            // Boss için 60 parçacık oluştur
             for (let i = 0; i < 60; i++) {
                 particles.push(new DeathParticle(centerX, centerY));
             }
-            // --- Bitiş ---
 
             boss.dataset.dying = true;
             clearTimeout(bossTimerTimeout); 
@@ -944,45 +1034,36 @@
                 toggleGame();
             }
 
-            // Bu süreyi de 100ms'ye düşürelim
             setTimeout(() => {
                 boss.remove();
             }, 100);
         }
 
-            // YENİ: Boss'u yenemezsek (süre dolarsa)
             function failBoss(boss) {
-                if (boss.dataset.dying) return; // Zaten yenilmiş
+                if (boss.dataset.dying) return; 
                 
-                // YENİ: Pof efektini boss'un pozisyonunda oluştur
                 const rect = boss.getBoundingClientRect();
                 createPuffEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
-                boss.remove(); // Boss'u kaldır
+                boss.remove(); 
                 showGameMessage("Süre Doldu!\nBoss Kaçtı.");
                 resetFromBoss();
             }
 
-            // YENİ: Boss savaşından sonra oyunu sıfırlama
             function resetFromBoss() {
                 isBossActive = false;
                 bossTimerContainer.classList.add('hidden');
-                // Süre çubuğu animasyonunu sıfırla
                 bossTimerBar.classList.remove('boss-timer-active');
                 bossTimerBar.style.width = '100%'; 
 
-                // Oyunu durdurmadıysak normal canavar akışına dön
                 if (isGameActive) {
                     gameInterval = setInterval(spawnMonster, spawnRate);
                 }
             }
 
-            // YENİ: Zayıf noktaların yerini rastgele değiştirir
             function randomizeWeakSpots(bossElement) {
                 const spots = bossElement.querySelectorAll('.weak-spot');
                 
-                // Zayıf noktaların birbirinden çok uzaklaşmamasını veya üst üste binmemesini
-                // sağlamak için basit bir de-overlap kontrolü
                 const newPositions = [];
                 let attempts = 0;
 
@@ -990,20 +1071,18 @@
                     let x, y, tooClose;
                     do {
                         tooClose = false;
-                        // Boss'un (128px) ve zayıf noktanın (24px) boyutlarına göre rastgele konum
-                        x = Math.random() * (120) - 20; // Range: -20px to 100px
-                        y = Math.random() * (100) + 0;   // Range: 0px to 100px
+                        x = Math.random() * (120) - 20; 
+                        y = Math.random() * (100) + 0;   
 
-                        // Diğer yeni pozisyonlara çok yakın mı diye kontrol et
                         for (const pos of newPositions) {
                             const distance = Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2));
-                            if (distance < 30) { // 30px'den yakınsa (yaklaşık spot boyutu)
+                            if (distance < 30) { 
                                 tooClose = true;
                                 break;
                             }
                         }
                         attempts++;
-                    } while (tooClose && attempts < 10); // 10 denemeden sonra çakışmayı kabul et
+                    } while (tooClose && attempts < 10); 
 
                     newPositions.push({x, y});
                     spot.style.left = x + 'px';
@@ -1011,14 +1090,11 @@
                 });
             }
             
-            // YENİ: Boss çağırma fonksiyonu
             function spawnBoss() {
-                isBossActive = true; // Boss durumunu aktifleştir
-                clearInterval(gameInterval); // Normal canavar akışını durdur
+                isBossActive = true; 
+                clearInterval(gameInterval); 
 
-                // Kalan tüm normal canavarları temizle
                 gameContainer.querySelectorAll('.monster:not(.boss)').forEach(m => {
-                    // YENİ: Kalan canavarlar için de pof efekti
                     const rect = m.getBoundingClientRect();
                     createPuffEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
                     m.remove();
@@ -1027,7 +1103,6 @@
                 const boss = document.createElement('div');
                 boss.classList.add('monster', 'boss');
                 
-                // YENİ: Zayıf noktaları ve HP BAR'ı boss'un içine göm
                 boss.innerHTML = `
                     <div class="hp-bar boss-hp-bar">
                         <div class="hp-bar-inner" style="width: 100%;"></div>
@@ -1037,38 +1112,32 @@
                     <div class="weak-spot" style="top: 60px; left: 110px;">🎯</div>
                 `;
 
-                boss.dataset.health = BOSS_HEALTH; // Boss canı
+                boss.dataset.health = BOSS_HEALTH; 
 
-                // Boss'u ekranın ortasına yerleştir
-                const bossSize = 128; // 8rem
+                const bossSize = 128; 
                 boss.style.left = (window.innerWidth / 2) - (bossSize / 2) + 'px';
-                boss.style.top = (window.innerHeight / 2) - (bossSize / 2) - 50 + 'px'; // Liderlik tablosundan biraz aşağıda
+                boss.style.top = (window.innerHeight / 2) - (bossSize / 2) - 50 + 'px'; 
 
-                boss.addEventListener('click', hitMonster); // GÜNCELLENDİ: Listener 'hitMonster'ı çağırır
+                boss.addEventListener('click', hitMonster); 
                 gameContainer.appendChild(boss);
 
-                // Süre sayacını başlat
                 bossTimerContainer.classList.remove('hidden');
-                // Animasyonu yeniden başlatmak için reflow'u zorla
                 bossTimerBar.classList.remove('boss-timer-active');
-                void bossTimerBar.offsetWidth; // Reflow
+                void bossTimerBar.offsetWidth; 
                 bossTimerBar.classList.add('boss-timer-active');
 
-                // Süre bittiğinde boss'u kaçır
                 bossTimerTimeout = setTimeout(() => {
                     failBoss(boss);
                 }, BOSS_TIME_LIMIT);
             }
 
 
-            // GÜNCELLENDİ: spawnMonster
             function spawnMonster() {
-                if (!isGameActive || isBossActive) return; // Boss aktifken spawn olma
+                if (!isGameActive || isBossActive) return; 
 
                 const monster = document.createElement('div');
                 monster.classList.add('monster');
                 
-                // YENİ: innerHTML olarak can barı ile birlikte ekle
                 const monsterEmoji = monsterTypes[Math.floor(Math.random() * monsterTypes.length)];
                 monster.innerHTML = `
                     <div class="hp-bar">
@@ -1077,22 +1146,18 @@
                     ${monsterEmoji}
                 `;
                 
-                // Header (yaklaşık 80px) ve footer (yaklaşık 150px) alanından kaçın
                 const spawnableHeight = window.innerHeight - 80 - 150;
-                const topOffset = 80; // Header'ın bittiği yer
+                const topOffset = 80; 
                 
-                monster.style.left = Math.random() * (window.innerWidth - 60) + 'px'; // 60px ~ canavar genişliği
+                monster.style.left = Math.random() * (window.innerWidth - 60) + 'px'; 
                 monster.style.top = (Math.random() * spawnableHeight) + topOffset + 'px';
                 
-                // YENİ: Can ekle
                 monster.dataset.health = MONSTER_HEALTH;
 
-                // GÜNCELLENDİ: Tıklama olayı
                 monster.addEventListener('click', hitMonster);
                 
                 gameContainer.appendChild(monster);
 
-                // Belirlenen süre sonunda tıklanmazsa canavarı kaldır
                 setTimeout(() => {
                     if (monster && !monster.dataset.dying) {
                         monster.remove();
@@ -1100,16 +1165,14 @@
                 }, monsterLife);
             }
 
-            // GÜNCELLENDİ: toggleGame
             function toggleGame() {
                 isGameActive = !isGameActive;
 
                 if (isGameActive) {
-                    // Oyunu Başlat
                     score = 0;
                     updateScoreDisplay();
                     scoreDisplay.classList.remove('hidden');
-                    gameContainer.style.pointerEvents = 'auto'; // Oyun alanına tıklanabilsin
+                    gameContainer.style.pointerEvents = 'auto'; 
                     playButton.title = "Oyunu Durdur";
                     
                     playButton.innerHTML = '<i data-lucide="square" class="w-5 h-5 sm:w-6 sm:h-6"></i>';
@@ -1119,9 +1182,8 @@
                     
                     gameInterval = setInterval(spawnMonster, spawnRate);
                 } else {
-                    // Oyunu Durdur
                     scoreDisplay.classList.add('hidden');
-                    gameContainer.style.pointerEvents = 'none'; // Tıklamaları engelle
+                    gameContainer.style.pointerEvents = 'none'; 
                     playButton.title = "Oyunu Başlat";
 
                     playButton.innerHTML = '<i data-lucide="gamepad-2" class="w-5 h-5 sm:w-6 sm:h-6"></i>';
@@ -1132,14 +1194,12 @@
                     clearInterval(gameInterval);
                     gameInterval = null;
                     
-                    // YENİ: Boss ile ilgili her şeyi temizle
                     clearTimeout(bossTimerTimeout);
                     if (isBossActive) {
                         resetFromBoss();
                     }
-                    isBossActive = false; // Oyunu durdurunca boss durumunu sıfırla
+                    isBossActive = false; 
                     
-                    // Kalan tüm canavarları temizle (ve pof efekti ekle)
                     gameContainer.querySelectorAll('.monster').forEach(m => {
                         const rect = m.getBoundingClientRect();
                         createPuffEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
@@ -1150,17 +1210,9 @@
             }
 
             playButton.addEventListener('click', toggleGame);
-            // --- / GİZLİ OYUN KODU ---
 
             setLanguage('tr'); 
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
